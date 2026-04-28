@@ -413,7 +413,7 @@ function buildCharts(data){
   const labs=days.map(d=>d.slice(8)+'/'+d.slice(5,7));
   Chart.register(ChartDataLabels);
   const lc='#0c1d73',mc='#6272a0';
-  const cfg={responsive:true,maintainAspectRatio:true,plugins:{datalabels:{display:false},legend:{labels:{color:mc,font:{family:'Nunito',size:11}}},tooltip:{backgroundColor:'#fff',titleColor:lc,bodyColor:lc,borderColor:'#d5dcf0',borderWidth:1}},scales:{x:{ticks:{color:mc,font:{family:'Nunito'}},grid:{color:'rgba(12,29,115,.06)'}}}};
+  const cfg={responsive:true,maintainAspectRatio:true,plugins:{datalabels:{display:false},legend:{position:'bottom',labels:{color:mc,font:{family:'Nunito',size:11},padding:16,boxWidth:14}},tooltip:{backgroundColor:'#fff',titleColor:lc,bodyColor:lc,borderColor:'#d5dcf0',borderWidth:1}},scales:{x:{ticks:{color:mc,font:{family:'Nunito'}},grid:{color:'rgba(12,29,115,.06)'}}}};
   if(ch1)ch1.destroy();
   ch1=new Chart(document.getElementById('chDaily'),{type:'bar',data:{labels:labs,datasets:[
     {label:'Leads',data:dL,backgroundColor:'rgba(13,159,79,.85)',borderRadius:6,yAxisID:'y1',order:3,datalabels:{display:true,anchor:'end',align:'top',offset:6,color:'#0a7a3a',font:{family:'Nunito',size:11,weight:'900'},formatter:v=>v+' lead'+(v!==1?'s':''),backgroundColor:'rgba(255,255,255,0.85)',borderRadius:4,padding:{top:2,bottom:2,left:5,right:5}}},
