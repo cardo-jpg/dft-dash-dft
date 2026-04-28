@@ -416,10 +416,10 @@ function buildCharts(data){
   const cfg={responsive:true,maintainAspectRatio:true,plugins:{datalabels:{display:false},legend:{labels:{color:mc,font:{family:'Nunito',size:11}}},tooltip:{backgroundColor:'#fff',titleColor:lc,bodyColor:lc,borderColor:'#d5dcf0',borderWidth:1}},scales:{x:{ticks:{color:mc,font:{family:'Nunito'}},grid:{color:'rgba(12,29,115,.06)'}}}};
   if(ch1)ch1.destroy();
   ch1=new Chart(document.getElementById('chDaily'),{type:'bar',data:{labels:labs,datasets:[
-    {label:'Investimento (R$)',data:dI,backgroundColor:'rgba(240,120,32,.85)',borderRadius:6,yAxisID:'y1',datalabels:{display:true,anchor:'end',align:'top',offset:8,color:'#b84f00',font:{family:'Nunito',size:11,weight:'900'},formatter:v=>'R$'+v.toFixed(0)}},
+    {label:'Leads',data:dL,backgroundColor:'rgba(13,159,79,.85)',borderRadius:6,yAxisID:'y1',datalabels:{display:true,anchor:'end',align:'top',offset:8,color:'#0a7a3a',font:{family:'Nunito',size:12,weight:'900'},formatter:v=>v+' lead'+(v!==1?'s':'')}},
+    {label:'Investimento (R$)',data:dI,type:'line',borderColor:'#f07820',borderWidth:2.5,backgroundColor:'transparent',tension:.4,pointRadius:5,pointBackgroundColor:'#f07820',pointBorderColor:'#fff',pointBorderWidth:2,yAxisID:'y2',datalabels:{display:false}},
     {label:'Cliques',data:dC,type:'line',borderColor:'#2621bf',borderWidth:2.5,backgroundColor:'transparent',tension:.4,pointRadius:5,pointBackgroundColor:'#2621bf',pointBorderColor:'#fff',pointBorderWidth:2,yAxisID:'y2',datalabels:{display:false}},
-    {label:'Leads',data:dL,type:'line',borderColor:'#0d9f4f',borderWidth:2.5,backgroundColor:'transparent',tension:.4,pointRadius:5,pointBackgroundColor:'#0d9f4f',pointBorderColor:'#fff',pointBorderWidth:2,yAxisID:'y2',datalabels:{display:false}},
-  ]},options:{...cfg,scales:{x:cfg.scales.x,y1:{position:'left',ticks:{color:mc,font:{family:'Nunito'},callback:v=>'R$'+v.toFixed(0)},grid:{color:'rgba(12,29,115,.06)'}},y2:{position:'right',ticks:{color:mc,font:{family:'Nunito'}},grid:{display:false}}}}});
+  ]},options:{...cfg,scales:{x:cfg.scales.x,y1:{position:'left',ticks:{color:mc,font:{family:'Nunito'},callback:v=>v+' leads'},grid:{color:'rgba(12,29,115,.06)'}},y2:{position:'right',ticks:{color:mc,font:{family:'Nunito'}},grid:{display:false}}}}});
   const camps=['Branding','Demanda Ativa','Segmentos'];
   const lbc=camps.map(c=>data.filter(r=>r.camp===c).reduce((s,r)=>s+r.leads,0));
   if(ch2)ch2.destroy();
