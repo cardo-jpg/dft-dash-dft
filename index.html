@@ -6,6 +6,7 @@
 <title>DFT Logística — Dashboard (Tema LP)</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <style>
 :root{
   --bg:#f0f3ff; --bg2:#0c1d73; --card:#ffffff; --card2:#e8edf8;
@@ -192,6 +193,11 @@ tbody td:first-child{color:#6272a0;font-size:.75rem;}
         <button class="ptab" onclick="setPreset(7,this)">7 dias</button>
         <button class="ptab" onclick="setPreset(3,this)">3 dias</button>
         <button class="ptab" onclick="setPreset(1,this)">Hoje</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <input type="date" id="dtFrom" value="2026-04-22" onchange="setCustomRange()" style="padding:7px 10px;border-radius:8px;border:1px solid var(--brd);background:var(--card);color:var(--wh);font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:700;outline:none;cursor:pointer;"/>
+        <span style="font-size:.75rem;color:var(--mu);font-weight:700;">até</span>
+        <input type="date" id="dtTo" value="2026-04-27" onchange="setCustomRange()" style="padding:7px 10px;border-radius:8px;border:1px solid var(--brd);background:var(--card);color:var(--wh);font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:700;outline:none;cursor:pointer;"/>
       </div>
     </div>
   </div>
@@ -382,7 +388,15 @@ function filterData(p){
 }
 function setPreset(p,btn){
   document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');render(filterData(p));
+  btn.classList.add('active');
+  render(filterData(p));
+}
+function setCustomRange(){
+  const from=document.getElementById('dtFrom').value;
+  const to=document.getElementById('dtTo').value;
+  if(!from||!to)return;
+  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
+  render(RAW.filter(r=>r.date>=from&&r.date<=to));
 }
 function agg(data){
   const tot={invest:0,imp:0,clk:0,leads:0};
@@ -397,17 +411,19 @@ function buildCharts(data){
   const dC=days.map(d=>data.filter(r=>r.date===d).reduce((s,r)=>s+r.clk,0));
   const dL=days.map(d=>data.filter(r=>r.date===d).reduce((s,r)=>s+r.leads,0));
   const labs=days.map(d=>d.slice(8)+'/'+d.slice(5,7));
-  const cfg={responsive:true,maintainAspectRatio:true,plugins:{legend:{labels:{color:'rgba(255,255,255,.65)',font:{family:'Nunito',size:11}}},tooltip:{backgroundColor:'#0c1d73',borderColor:'rgba(255,255,255,.1)',borderWidth:1}},scales:{x:{ticks:{color:'rgba(255,255,255,.45)',font:{family:'Nunito'}},grid:{color:'rgba(255,255,255,.05)'}}}};
+  Chart.register(ChartDataLabels);
+  const lc='#0c1d73',mc='#6272a0';
+  const cfg={responsive:true,maintainAspectRatio:true,plugins:{datalabels:{display:false},legend:{labels:{color:mc,font:{family:'Nunito',size:11}}},tooltip:{backgroundColor:'#fff',titleColor:lc,bodyColor:lc,borderColor:'#d5dcf0',borderWidth:1}},scales:{x:{ticks:{color:mc,font:{family:'Nunito'}},grid:{color:'rgba(12,29,115,.06)'}}}};
   if(ch1)ch1.destroy();
   ch1=new Chart(document.getElementById('chDaily'),{type:'bar',data:{labels:labs,datasets:[
-    {label:'Invest (R$)',data:dI,backgroundColor:'rgba(240,120,32,.75)',borderRadius:5,yAxisID:'y1'},
-    {label:'Cliques',data:dC,type:'line',borderColor:'#4285f4',backgroundColor:'rgba(66,133,244,.1)',tension:.3,pointRadius:4,pointBackgroundColor:'#4285f4',yAxisID:'y2'},
-    {label:'Leads',data:dL,type:'line',borderColor:'#34a853',backgroundColor:'rgba(52,168,83,.1)',tension:.3,pointRadius:4,pointBackgroundColor:'#34a853',yAxisID:'y2'},
-  ]},options:{...cfg,scales:{x:cfg.scales.x,y1:{position:'left',ticks:{color:'rgba(255,255,255,.45)',font:{family:'Nunito'},callback:v=>'R$'+v.toFixed(0)},grid:{color:'rgba(255,255,255,.05)'}},y2:{position:'right',ticks:{color:'rgba(255,255,255,.45)',font:{family:'Nunito'}},grid:{display:false}}}}});
+    {label:'Invest (R$)',data:dI,backgroundColor:'rgba(38,33,191,.75)',borderRadius:5,yAxisID:'y1',datalabels:{display:true,anchor:'end',align:'top',color:lc,font:{family:'Nunito',size:10,weight:'800'},formatter:v=>'R$'+v.toFixed(0)}},
+    {label:'Cliques',data:dC,type:'line',borderColor:'#2621bf',backgroundColor:'rgba(38,33,191,.08)',tension:.3,pointRadius:5,pointBackgroundColor:'#2621bf',yAxisID:'y2',datalabels:{display:true,anchor:'end',align:'top',color:'#2621bf',font:{family:'Nunito',size:10,weight:'800'}}},
+    {label:'Leads',data:dL,type:'line',borderColor:'#34a853',backgroundColor:'rgba(52,168,83,.08)',tension:.3,pointRadius:5,pointBackgroundColor:'#34a853',yAxisID:'y2',datalabels:{display:true,anchor:'end',align:'bottom',color:'#34a853',font:{family:'Nunito',size:10,weight:'800'}}},
+  ]},options:{...cfg,scales:{x:cfg.scales.x,y1:{position:'left',ticks:{color:mc,font:{family:'Nunito'},callback:v=>'R$'+v.toFixed(0)},grid:{color:'rgba(12,29,115,.06)'}},y2:{position:'right',ticks:{color:mc,font:{family:'Nunito'}},grid:{display:false}}}}});
   const camps=['Branding','Demanda Ativa','Segmentos'];
   const lbc=camps.map(c=>data.filter(r=>r.camp===c).reduce((s,r)=>s+r.leads,0));
   if(ch2)ch2.destroy();
-  ch2=new Chart(document.getElementById('chLeads'),{type:'doughnut',data:{labels:camps,datasets:[{data:lbc,backgroundColor:['rgba(24,119,242,.8)','rgba(26,115,232,.8)','rgba(52,168,83,.8)'],borderWidth:2,borderColor:'#0f1050',hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{position:'bottom',labels:{color:'rgba(255,255,255,.65)',font:{family:'Nunito',size:11},padding:10}},tooltip:{backgroundColor:'#0c1d73',borderColor:'rgba(255,255,255,.1)',borderWidth:1}}}});
+  ch2=new Chart(document.getElementById('chLeads'),{type:'doughnut',data:{labels:camps,datasets:[{data:lbc,backgroundColor:['rgba(38,33,191,.85)','rgba(26,115,232,.85)','rgba(52,168,83,.85)'],borderWidth:2,borderColor:'#fff',hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:true,plugins:{datalabels:{display:true,color:'#fff',font:{family:'Nunito',size:13,weight:'900'},formatter:(v,ctx)=>{const t=ctx.dataset.data.reduce((a,b)=>a+b,0);return t>0&&v>0?v+' leads':''}},legend:{position:'bottom',labels:{color:mc,font:{family:'Nunito',size:11},padding:10}},tooltip:{backgroundColor:'#fff',titleColor:lc,bodyColor:lc,borderColor:'#d5dcf0',borderWidth:1}}}});
 }
 function buildTable(data){
   const sorted=[...data].sort((a,b)=>b.date.localeCompare(a.date));
