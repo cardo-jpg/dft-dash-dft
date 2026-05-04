@@ -413,7 +413,6 @@ function applyDateRange(){
   document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
   render(filtered);
 }
-}
 function buildTable(data){
   const sorted=[...data].sort((a,b)=>b.date.localeCompare(a.date));
   const cb={'Branding':'pbr','Demanda Ativa':'pdem','Segmentos':'pseg'};
