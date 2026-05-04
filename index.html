@@ -362,23 +362,37 @@ tbody td:first-child{color:#6272a0;font-size:.75rem;}
 
 <script>
 const RAW=[
-  {date:'2026-04-22',camp:'Branding',   invest:15.34,imp:30,  clk:4, leads:0},
-  {date:'2026-04-23',camp:'Demanda Ativa',invest:57.72,imp:48,clk:6, leads:0},
-  {date:'2026-04-23',camp:'Branding',   invest:13.64,imp:5,   clk:2, leads:1},
-  {date:'2026-04-24',camp:'Demanda Ativa',invest:40.74,imp:94,clk:7, leads:1},
-  {date:'2026-04-24',camp:'Branding',   invest:15.00,imp:12,  clk:2, leads:1},
-  {date:'2026-04-24',camp:'Segmentos',  invest:76.58,imp:1205,clk:45,leads:4},
-  {date:'2026-04-25',camp:'Branding',   invest:14.22,imp:66,  clk:10,leads:1},
-  {date:'2026-04-26',camp:'Branding',   invest:18.45,imp:63,  clk:6, leads:2},
-  {date:'2026-04-27',camp:'Demanda Ativa',invest:34.18,imp:93,clk:6, leads:1},
-  {date:'2026-04-27',camp:'Branding',   invest:9.71, imp:40,  clk:7, leads:2},
-  {date:'2026-04-27',camp:'Segmentos',  invest:56.86,imp:455, clk:17,leads:0},
+  {date:'2026-04-22',camp:'Branding',   invest:15.34, imp:30,   clk:4,  leads:0},
+  {date:'2026-04-23',camp:'Demanda Ativa',invest:57.72,imp:48,  clk:6,  leads:0},
+  {date:'2026-04-23',camp:'Branding',   invest:13.64, imp:5,    clk:2,  leads:1},
+  {date:'2026-04-24',camp:'Demanda Ativa',invest:40.74,imp:94,  clk:7,  leads:1},
+  {date:'2026-04-24',camp:'Branding',   invest:15.00, imp:12,   clk:2,  leads:1},
+  {date:'2026-04-24',camp:'Segmentos',  invest:76.58, imp:1204, clk:45, leads:4},
+  {date:'2026-04-25',camp:'Branding',   invest:14.22, imp:66,   clk:10, leads:1},
+  {date:'2026-04-26',camp:'Branding',   invest:18.45, imp:63,   clk:6,  leads:2},
+  {date:'2026-04-27',camp:'Demanda Ativa',invest:34.18,imp:93,  clk:6,  leads:1},
+  {date:'2026-04-27',camp:'Branding',   invest:10.43, imp:41,   clk:8,  leads:2},
+  {date:'2026-04-27',camp:'Segmentos',  invest:56.86, imp:455,  clk:17, leads:0},
+  {date:'2026-04-28',camp:'Demanda Ativa',invest:30.85,imp:48,  clk:5,  leads:1},
+  {date:'2026-04-28',camp:'Branding',   invest:12.22, imp:4,    clk:2,  leads:0},
+  {date:'2026-04-28',camp:'Segmentos',  invest:49.95, imp:385,  clk:8,  leads:0},
+  {date:'2026-04-29',camp:'Demanda Ativa',invest:35.42,imp:37,  clk:6,  leads:1},
+  {date:'2026-04-29',camp:'Branding',   invest:9.80,  imp:1,    clk:1,  leads:1},
+  {date:'2026-04-29',camp:'Segmentos',  invest:40.70, imp:32,   clk:3,  leads:0},
+  {date:'2026-04-30',camp:'Demanda Ativa',invest:32.03,imp:82,  clk:6,  leads:0},
+  {date:'2026-04-30',camp:'Branding',   invest:7.87,  imp:21,   clk:4,  leads:2},
+  {date:'2026-04-30',camp:'Segmentos',  invest:47.34, imp:1028, clk:25, leads:2},
+  {date:'2026-05-01',camp:'Demanda Ativa',invest:24.36,imp:105, clk:7,  leads:0},
+  {date:'2026-05-01',camp:'Branding',   invest:8.52,  imp:77,   clk:6,  leads:2},
+  {date:'2026-05-01',camp:'Segmentos',  invest:23.13, imp:1647, clk:19, leads:1},
+  {date:'2026-05-02',camp:'Branding',   invest:19.63, imp:81,   clk:8,  leads:2},
+  {date:'2026-05-03',camp:'Branding',   invest:15.01, imp:60,   clk:8,  leads:2},
 ];
 const BRL=v=>v==null||isNaN(v)?'—':'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const NUM=v=>v==null?'—':v.toLocaleString('pt-BR');
 const PCT=v=>v==null||isNaN(v)?'—':v.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
 const S=(id,h)=>{const e=document.getElementById(id);if(e)e.innerHTML=h;};
-const TODAY='2026-04-27';
+const TODAY='2026-05-03';
 
 function filterData(p){
   if(p==='all')return RAW;
