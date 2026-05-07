@@ -1,0 +1,30 @@
+name: Atualizar dados dashboard
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # 03:00 BRT (06:00 UTC) todo dia
+  workflow_dispatch:        # permite rodar manualmente
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Atualizar dados da planilha
+        run: python update_from_sheets.py
+
+      - name: Commit e push se houve mudanca
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --staged --quiet || git commit -m "auto: atualiza dados $(date +'%d/%m/%Y')"
+          git push
