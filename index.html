@@ -212,6 +212,15 @@ tbody td:first-child{color:#6272a0;font-size:.75rem;}
         <button class="ptab" onclick="setPreset(3,this)">3 dias</button>
         <button class="ptab" onclick="setPreset(1,this)">Hoje</button>
       </div>
+      <div class="ptabs" style="margin-left:4px;">
+        <button class="ptab" onclick="setDow(1,this)">Seg</button>
+        <button class="ptab" onclick="setDow(2,this)">Ter</button>
+        <button class="ptab" onclick="setDow(3,this)">Qua</button>
+        <button class="ptab" onclick="setDow(4,this)">Qui</button>
+        <button class="ptab" onclick="setDow(5,this)">Sex</button>
+        <button class="ptab" onclick="setDow(6,this)">Sab</button>
+        <button class="ptab" onclick="setDow(0,this)">Dom</button>
+      </div>
       <div class="drange">
         <label>De</label>
         <input type="date" id="dFrom" value="2026-04-22">
@@ -881,6 +890,13 @@ const PCT=v=>v==null||isNaN(v)?'—':v.toLocaleString('pt-BR',{minimumFractionDi
 const S=(id,h)=>{const e=document.getElementById(id);if(e)e.innerHTML=h;};
 
 function filterData(p){if(p==='all')return _RAW;if(!_RAW.length)return [];var today=_RAW[_RAW.length-1].date,t=new Date(today),c=new Date(t);c.setDate(t.getDate()-(p-1));var cs=c.toISOString().slice(0,10);return _RAW.filter(function(r){return r.date>=cs;});}
+function setDow(dow,btn){
+  document.querySelectorAll('.ptab').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  var f=_RAW.filter(function(r){var d=new Date(r.date);return d.getDay()===dow;});
+  if(!f.length){alert('Nenhum dado para este dia da semana.');return;}
+  renderGAds(f);
+}
 function setPreset(p,btn){
   document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');render(filterData(p));
