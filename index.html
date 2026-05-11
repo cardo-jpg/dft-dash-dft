@@ -377,8 +377,14 @@ function filterData(p){if(p==='all')return _RAW;if(!_RAW.length)return [];var to
 function setDow(dow,btn){
   document.querySelectorAll(".ptab").forEach(function(b){b.classList.remove("active");});
   btn.classList.add("active");
-  var f=_RAW.filter(function(r){var p=r.date.split('-');var d=new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));return d.getDay()===dow;});
-  if(!f.length){alert("Nenhum dado para este dia da semana.");return;}
+  // Find the most recent date that matches this day of week
+  var lastDate=null;
+  _RAW.forEach(function(r){
+    var p=r.date.split('-');var d=new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));
+    if(d.getDay()===dow&&(!lastDate||r.date>lastDate))lastDate=r.date;
+  });
+  if(!lastDate){alert("Nenhum dado para este dia da semana.");return;}
+  var f=_RAW.filter(function(r){return r.date===lastDate;});
   render(f);
 }
 function setPreset(p,btn){
