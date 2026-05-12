@@ -191,9 +191,38 @@ tbody td:first-child{color:#6272a0;font-size:.75rem;}
 .camp-pill{display:inline-block;padding:2px 8px;border-radius:100px;font-size:.62rem;font-weight:800;}
 .sv1 .ms-header{border-bottom:2px solid rgba(24,119,242,.3);padding-bottom:12px;}
 .sv2 .ms-header{border-bottom:2px solid rgba(168,85,247,.3);padding-bottom:12px;}
+
+/* simulator */
+#simSection{display:none;position:relative;z-index:1;max-width:1300px;margin:0 auto;padding:0 32px 60px;}
+.sim-title{font-size:.65rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:#0c1d73;display:flex;align-items:center;gap:12px;margin-bottom:20px;margin-top:32px;}
+.sim-title::after{content:"";flex:1;height:1px;background:#d5dcf0;}
+.sim-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px;}
+.sim-card{background:#fff;border:1px solid #d5dcf0;border-radius:15px;padding:22px;position:relative;overflow:hidden;}
+.sim-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;border-radius:15px 15px 0 0;}
+.sim-card.br::before{background:linear-gradient(90deg,#1877f2,#42a5f5);}
+.sim-card.da::before{background:linear-gradient(90deg,#1a73e8,#4285f4);}
+.sim-card.seg::before{background:linear-gradient(90deg,#34a853,#137333);}
+.sim-camp{font-size:.62rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#6272a0;margin-bottom:4px;}
+.sim-name{font-size:.9rem;font-weight:900;color:#0c1d73;margin-bottom:16px;}
+.sim-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f0f3ff;}
+.sim-row:last-child{border-bottom:none;}
+.sim-lbl{font-size:.72rem;color:#6272a0;font-weight:600;}
+.sim-val{font-size:.82rem;font-weight:800;color:#0c1d73;}
+.sim-val.red{color:#ef4444;} .sim-val.green{color:#34d399;} .sim-val.amber{color:#f59e0b;}
+.sim-rec{background:linear-gradient(135deg,#0c1d73,#1d1f96);border-radius:12px;padding:16px 18px;margin-top:14px;text-align:center;}
+.sim-rec-lbl{font-size:.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:6px;}
+.sim-rec-val{font-size:1.4rem;font-weight:900;color:#fff;}
+.sim-rec-sub{font-size:.68rem;color:rgba(255,255,255,.55);margin-top:4px;}
+.sim-note{background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:14px 18px;font-size:.75rem;color:#0369a1;line-height:1.6;}
 </style>
 </head>
 <body>
+
+<div id="simSection">
+  <div class="sim-title">Simulador de Orcamento - Google Ads</div>
+  <div class="sim-note">Como funciona: com base na parcela de impressoes perdidas por orcamento de cada campanha, calculamos quanto seria necessario investir por dia para capturar todas as impressoes disponiveis. Perdas por qualidade nao sao resolvidas com mais verba.</div>
+  <div class="sim-cards" id="simCards"></div>
+</div>
 <div class="gl"></div>
 <header>
   <div class="hi">
@@ -230,6 +259,7 @@ tbody td:first-child{color:#6272a0;font-size:.75rem;}
       </div>
       <button class="dbtn" onclick="applyDateRange()">Aplicar</button>
       <a href="relatorio.html" class="dbtn" style="text-decoration:none;">Relatorio</a>
+      <button class="dbtn" onclick="toggleSim()" id="btnSim">Simulador</button>
     </div>
   </div>
 </header>
@@ -1027,6 +1057,60 @@ function render(data){
   S('fI',NUM(tot.imp));S('fC',NUM(tot.clk));S('fL',tot.leads);
   S('fCtr',PCT(ctr));S('fConv',PCT(conv));S('frCtr',PCT(ctr));S('frConv',PCT(conv));S('frCpc',BRL(cpc));S('frCpl',BRL(cpl));
   buildCharts(data);buildTable(data);
+}
+function toggleSim(){
+  var s=document.getElementById("simSection");
+  var m=document.querySelector("main");
+  var btn=document.getElementById("btnSim");
+  if(s.style.display==="block"){
+    s.style.display="none";m.style.display="block";
+    btn.style.background="";btn.style.color="";
+  }else{
+    s.style.display="block";m.style.display="none";
+    btn.style.background="#2621bf";btn.style.color="#fff";
+    buildSim();
+  }
+}
+function buildSim(){
+  if(!_RAW.length)return;
+  var camps={
+    "Branding":{label:"Campanha de Marca",cls:"br"},
+    "Demanda Ativa":{label:"Demanda Ativa",cls:"da"},
+    "Segmentos":{label:"Segmentos ICP",cls:"seg"}
+  };
+  var BRL2=function(v){return"R$ "+v.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});};
+  var out="";
+  Object.keys(camps).forEach(function(k){
+    var info=camps[k];
+    var rows=_RAW.filter(function(r){return r.camp===k;});
+    if(!rows.length)return;
+    var days=new Set(rows.map(function(r){return r.date;})).size||1;
+    var totalSpend=rows.reduce(function(s,r){return s+r.invest;},0);
+    var totalImp=rows.reduce(function(s,r){return s+r.imp;},0);
+    var totalLeads=rows.reduce(function(s,r){return s+r.leads;},0);
+    var avgSpend=totalSpend/days;
+    var avgIsWon=rows.reduce(function(s,r){return s+(r.is_won||0);},0)/rows.length;
+    var avgIsBudget=rows.reduce(function(s,r){return s+(r.is_budget||0);},0)/rows.length;
+    var avgIsQual=rows.reduce(function(s,r){return s+(r.is_quality||0);},0)/rows.length;
+    var recBudget=avgIsWon>0?avgSpend*(avgIsWon+avgIsBudget)/avgIsWon:avgSpend;
+    var extraSpend=recBudget-avgSpend;
+    var cpl=totalLeads>0?totalSpend/totalLeads:0;
+    var extraLeads=cpl>0?Math.round(extraSpend/cpl*days):0;
+    out+='<div class="sim-card '+info.cls+'">'
+      +'<div class="sim-camp">Google Ads</div>'
+      +'<div class="sim-name">'+info.label+'</div>'
+      +'<div class="sim-row"><span class="sim-lbl">Gasto medio por dia</span><span class="sim-val">'+BRL2(avgSpend)+'</span></div>'
+      +'<div class="sim-row"><span class="sim-lbl">Impressoes capturadas</span><span class="sim-val amber">'+avgIsWon.toFixed(1)+'%</span></div>'
+      +'<div class="sim-row"><span class="sim-lbl">Perdendo por falta de verba</span><span class="sim-val red">'+avgIsBudget.toFixed(1)+'%</span></div>'
+      +'<div class="sim-row"><span class="sim-lbl">Perdendo por qualidade</span><span class="sim-val amber">'+avgIsQual.toFixed(1)+'% (nao resolve com verba)</span></div>'
+      +'<div class="sim-row"><span class="sim-lbl">Verba extra necessaria/dia</span><span class="sim-val green">+ '+BRL2(extraSpend)+'</span></div>'
+      +'<div class="sim-rec">'
+      +'<div class="sim-rec-lbl">Investimento diario recomendado</div>'
+      +'<div class="sim-rec-val">'+BRL2(recBudget)+'/dia</div>'
+      +(extraLeads>0?'<div class="sim-rec-sub">Estimativa: +'+extraLeads+' lead'+( extraLeads>1?"s":"")+' adicionais no periodo</div>':"" )
+      +'</div></div>';
+  });
+  document.getElementById("simCards").innerHTML=out;
 }
 (async function(){
   try{
