@@ -552,11 +552,11 @@ function buildSim(){
     var recBudget=avgIsWon>0?avgSpend*(avgIsWon+avgIsBudget)/avgIsWon:avgSpend;
     var gap=recBudget-avgSpend;
     var cpl=totalLeads>0?totalSpend/totalLeads:0;
-    // 3 conservative scenarios: fill 25%, 50%, 75% of the budget gap
+    // 3 conservative scenarios: +15%, +30%, +50% over current spend
     var scenarios=[
-      {label:"Conservador",pct:0.25,color:"#3b82f6"},
-      {label:"Moderado",pct:0.50,color:"#8b5cf6"},
-      {label:"Crescimento",pct:0.75,color:"#0c1d73"}
+      {label:"Conservador +15%",inc:0.15,color:"#3b82f6"},
+      {label:"Moderado +30%",inc:0.30,color:"#8b5cf6"},
+      {label:"Crescimento +50%",inc:0.50,color:"#0c1d73"}
     ];
     out+='<div class="sim-card '+info.cls+'">'
       +'<div class="sim-camp">Google Ads</div>'
@@ -565,9 +565,10 @@ function buildSim(){
       +'<div class="sim-row"><span class="sim-lbl">Perdendo por verba</span><span class="sim-val red">'+avgIsBudget.toFixed(1)+'%</span></div>'
       +'<div class="sim-row"><span class="sim-lbl">Perdendo por qualidade</span><span class="sim-val amber">'+avgIsQual.toFixed(1)+'% (nao resolve com verba)</span></div>';
     scenarios.forEach(function(sc){
-      var extraDay=gap*sc.pct;
+      var extraDay=avgSpend*sc.inc;
       var newBudget=avgSpend+extraDay;
-      var newIs=avgIsWon+avgIsBudget*sc.pct;
+      var gapPct=gap>0?extraDay/gap:0;
+      var newIs=avgIsWon+avgIsBudget*gapPct;
       var extraLeadsMonth=cpl>0?Math.round(extraDay*30/cpl):0;
       out+='<div style="margin-top:10px;background:#f8faff;border-radius:10px;padding:12px 14px;">'
         +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">'
