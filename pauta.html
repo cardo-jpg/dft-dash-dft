@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pauta — DFT Logística | 19/05/2026</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:#050d2e;color:#e8eaf6;min-height:100vh;}
+
+  .slide{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:60px 72px;border-bottom:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;}
+  .slide::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(29,31,150,.25),transparent 60%);pointer-events:none;}
+
+  /* cover */
+  .cover{background:linear-gradient(135deg,#050d2e 0%,#0c1d73 100%);}
+  .cover-label{font-size:.7rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#5c6bc0;margin-bottom:20px;}
+  .cover-title{font-size:3rem;font-weight:900;color:#fff;line-height:1.1;margin-bottom:16px;}
+  .cover-title span{color:#7986cb;}
+  .cover-sub{font-size:1rem;color:rgba(255,255,255,.5);margin-top:12px;}
+  .cover-date{margin-top:40px;font-size:.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5c6bc0;}
+
+  /* section headers */
+  .sec-label{font-size:.65rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#5c6bc0;margin-bottom:8px;display:flex;align-items:center;gap:10px;}
+  .sec-label::after{content:"";flex:1;height:1px;background:rgba(92,107,192,.3);}
+  .sec-title{font-size:1.9rem;font-weight:900;color:#fff;margin-bottom:32px;}
+  .sec-title span{color:#7986cb;}
+
+  /* lead cards */
+  .lead-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .lead-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 20px;position:relative;}
+  .lead-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+  .lead-name{font-size:.92rem;font-weight:800;color:#fff;}
+  .lead-contact{font-size:.72rem;color:rgba(255,255,255,.4);margin-top:2px;}
+  .badge{font-size:.58rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;border-radius:20px;padding:3px 9px;white-space:nowrap;}
+  .b-hot{background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.3);}
+  .b-pipeline{background:rgba(99,179,237,.12);color:#63b3ed;border:1px solid rgba(99,179,237,.3);}
+  .b-prospect{background:rgba(245,158,11,.12);color:#f59e0b;border:1px solid rgba(245,158,11,.3);}
+  .b-pontual{background:rgba(148,163,184,.1);color:#94a3b8;border:1px solid rgba(148,163,184,.2);}
+  .b-low{background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.2);}
+  .lead-seg{font-size:.7rem;color:rgba(255,255,255,.45);margin-bottom:6px;}
+  .lead-status{font-size:.72rem;color:rgba(255,255,255,.6);line-height:1.5;}
+
+  /* highlight card */
+  .highlight{background:linear-gradient(135deg,rgba(52,211,153,.08),rgba(16,185,129,.04));border:1px solid rgba(52,211,153,.25);border-radius:16px;padding:28px 32px;display:flex;gap:32px;align-items:flex-start;}
+  .hl-icon{font-size:2.5rem;flex-shrink:0;}
+  .hl-label{font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#34d399;margin-bottom:8px;}
+  .hl-name{font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:6px;}
+  .hl-desc{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:16px;}
+  .hl-metrics{display:flex;gap:24px;flex-wrap:wrap;}
+  .hl-m{background:rgba(52,211,153,.1);border-radius:10px;padding:10px 16px;text-align:center;}
+  .hl-m-lbl{font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(52,211,153,.7);}
+  .hl-m-val{font-size:.92rem;font-weight:900;color:#34d399;margin-top:2px;}
+
+  /* pipeline */
+  .pipe-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  .pipe-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px;}
+  .pipe-num{font-size:1.6rem;font-weight:900;color:#7986cb;margin-bottom:4px;}
+  .pipe-name{font-size:.8rem;font-weight:700;color:#fff;}
+  .pipe-seg{font-size:.67rem;color:rgba(255,255,255,.4);margin-top:3px;}
+
+  /* optim */
+  .optim-list{display:flex;flex-direction:column;gap:14px;}
+  .optim-item{display:flex;gap:16px;align-items:flex-start;}
+  .optim-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+  .oi-blue{background:rgba(99,179,237,.15);}
+  .oi-purple{background:rgba(167,139,250,.15);}
+  .oi-green{background:rgba(52,211,153,.15);}
+  .oi-amber{background:rgba(245,158,11,.15);}
+  .optim-body{}
+  .optim-title{font-size:.85rem;font-weight:800;color:#fff;margin-bottom:3px;}
+  .optim-desc{font-size:.75rem;color:rgba(255,255,255,.5);line-height:1.5;}
+
+  /* insight */
+  .insight-box{background:linear-gradient(135deg,rgba(24,119,242,.12),rgba(66,133,244,.06));border:1px solid rgba(24,119,242,.25);border-radius:16px;padding:28px 32px;}
+  .insight-num{font-size:3.5rem;font-weight:900;color:#63b3ed;line-height:1;}
+  .insight-label{font-size:.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(99,179,237,.7);margin-bottom:16px;margin-top:4px;}
+  .insight-desc{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.6;max-width:520px;}
+
+  /* mql */
+  .mql-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .mql-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 18px;}
+  .mql-icon{font-size:1.2rem;margin-bottom:8px;}
+  .mql-label{font-size:.62rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#5c6bc0;margin-bottom:4px;}
+  .mql-val{font-size:.8rem;font-weight:700;color:#e8eaf6;line-height:1.4;}
+
+  /* next steps */
+  .next-list{display:flex;flex-direction:column;gap:12px;}
+  .next-item{display:flex;gap:14px;align-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 18px;}
+  .next-n{width:28px;height:28px;border-radius:50%;background:#0c1d73;border:1px solid #3949ab;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:900;color:#7986cb;flex-shrink:0;}
+  .next-text{font-size:.82rem;color:rgba(255,255,255,.75);line-height:1.4;}
+  .next-text strong{color:#fff;}
+
+  /* page numbers */
+  .pn{position:absolute;bottom:24px;right:36px;font-size:.62rem;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.2);}
+
+  /* footer brand */
+  .brand-footer{text-align:center;padding:32px;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);}
+
+  @media(max-width:768px){
+    .slide{padding:40px 24px;}
+    .cover-title{font-size:2rem;}
+    .lead-grid,.pipe-grid,.mql-grid{grid-template-columns:1fr 1fr;}
+    .highlight{flex-direction:column;}
+    .sec-title{font-size:1.4rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- 1. CAPA -->
+<div class="slide cover">
+  <div class="cover-label">Cardô Marketing × DFT Logística</div>
+  <div class="cover-title">Relatório Semanal<br><span>Leads + Campanhas</span></div>
+  <div class="cover-sub">Período: 11 a 18 de maio de 2026</div>
+  <div class="cover-date">Reunião — 19/05/2026</div>
+  <div class="pn">01</div>
+</div>
+
+<!-- 2. LEADS RECEBIDOS -->
+<div class="slide">
+  <div class="sec-label">Leads da semana</div>
+  <div class="sec-title">8 leads recebidos<br><span>11–14 de maio</span></div>
+  <div class="lead-grid">
+    <div class="lead-card">
+      <div class="lead-card-top">
+        <div>
+          <div class="lead-name">VetBR Saúde Animal</div>
+          <div class="lead-contact">Wesley — WhatsApp</div>
+        </div>
+        <span class="badge b-hot">Quente</span>
+      </div>
+      <div class="lead-seg">Saúde animal · Distribuidor</div>
+      <div class="lead-status">Fracionado recorrente · Estado de SP · Alta aderência ao ICP</div>
+    </div>
+    <div class="lead-card">
+      <div class="lead-card-top">
+        <div>
+          <div class="lead-name">Werner Alimentos</div>
+          <div class="lead-contact">Instagram → WhatsApp</div>
+        </div>
+        <span class="badge b-pipeline">Em qualificação</span>
+      </div>
+      <div class="lead-seg">Alimentos</div>
+      <div class="lead-status">Reunião agendada para entender operação e validar potencial</div>
+    </div>
+    <div class="lead-card">
+      <div class="lead-card-top">
+        <div>
+          <div class="lead-name">Tranter</div>
+          <div class="lead-contact">Entrada 14/05</div>
+        </div>
+        <span class="badge b-pipeline">Em qualificação</span>
+      </div>
+      <div class="lead-seg">Indústria de equipamentos</div>
+      <div class="lead-status">Lead recente, em fase inicial de contato</div>
+    </div>
+    <div class="lead-card">
+      <div class="lead-card-top">
+        <div>
+          <div class="lead-name">Cisbra Agroindustrial</div>
+          <div class="lead-contact">Lucas Barrabás · 12/05</div>
+        </div>
+        <span class="badge b-prospect">Em prospecção</span>
+      </div>
+      <div class="lead-seg">Agroindustrial</div>
+      <div class="lead-status">Tentativas de contato em andamento — sem retorno até o momento</div>
+    </div>
+    <div class="lead-card">
+      <div class="lead-card-top">
+        <div>
+          <div class="lead-name">OHMEX</div>
+          <div class="lead-contact">Otávio · 11/05</div>
+        </div>
+        <span class="badge b-pontual">Projeto futuro</span>
+      </div>
+      <div class="lead-seg">Industrial</div>
+      <div class="lead-status">Projeto em aprovação — previsão 2º semestre. Operação atual majoritariamente FOB</div>
+    </div>
+    <div class="lead-card">
+      <div class="lead-card-top">
+        <div>
+          <div class="lead-name">SertCana · SENAI · MarBrasil · Clarity</div>
+        </div>
+        <span class="badge b-low">Sem recorrência</span>
+      </div>
+      <div class="lead-seg">Agrícola / Educação / Climatização / Vidros</div>
+      <div class="lead-status">Demandas pontuais ou sem aderência ao perfil de cliente ideal (ICP)</div>
+    </div>
+  </div>
+  <div class="pn">02</div>
+</div>
+
+<!-- 3. DESTAQUE: VetBR -->
+<div class="slide">
+  <div class="sec-label">Destaque da semana</div>
+  <div class="sec-title">Lead <span>mais qualificado</span></div>
+  <div class="highlight">
+    <div class="hl-icon">🚛</div>
+    <div>
+      <div class="hl-label">Lead quente</div>
+      <div class="hl-name">VetBR Saúde Animal</div>
+      <div class="hl-desc">Distribuidora nacional de produtos para saúde animal. Demanda de transporte fracionado com <strong style="color:#34d399">recorrência frequente</strong> dentro do estado de São Paulo. Alto alinhamento com o perfil de cliente ideal da DFT.</div>
+      <div class="hl-metrics">
+        <div class="hl-m">
+          <div class="hl-m-lbl">Tipo de operação</div>
+          <div class="hl-m-val">Fracionado</div>
+        </div>
+        <div class="hl-m">
+          <div class="hl-m-lbl">Região</div>
+          <div class="hl-m-val">Estado de SP</div>
+        </div>
+        <div class="hl-m">
+          <div class="hl-m-lbl">Recorrência</div>
+          <div class="hl-m-val">Alta</div>
+        </div>
+        <div class="hl-m">
+          <div class="hl-m-lbl">Aderência ICP</div>
+          <div class="hl-m-val">Alta</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">03</div>
+</div>
+
+<!-- 4. PIPELINE ATUAL -->
+<div class="slide">
+  <div class="sec-label">Pipeline</div>
+  <div class="sec-title"><span>8 leads</span> em andamento</div>
+  <div class="pipe-grid">
+    <div class="pipe-card">
+      <div class="pipe-num">01</div>
+      <div class="pipe-name">VetBR</div>
+      <div class="pipe-seg">Saúde animal · Quente</div>
+    </div>
+    <div class="pipe-card">
+      <div class="pipe-num">02</div>
+      <div class="pipe-name">Werner Alimentos</div>
+      <div class="pipe-seg">Alimentos · Em qualificação</div>
+    </div>
+    <div class="pipe-card">
+      <div class="pipe-num">03</div>
+      <div class="pipe-name">Tranter</div>
+      <div class="pipe-seg">Equipamentos · Novo</div>
+    </div>
+    <div class="pipe-card">
+      <div class="pipe-num">04</div>
+      <div class="pipe-name">Cisbra Agroindustrial</div>
+      <div class="pipe-seg">Agroindustrial · Prospecção</div>
+    </div>
+    <div class="pipe-card">
+      <div class="pipe-num">05</div>
+      <div class="pipe-name">AGROSTAHL</div>
+      <div class="pipe-seg">Agroindustrial</div>
+    </div>
+    <div class="pipe-card">
+      <div class="pipe-num">06</div>
+      <div class="pipe-name">Labnorte</div>
+      <div class="pipe-seg">Laboratorial</div>
+    </div>
+    <div class="pipe-card">
+      <div class="pipe-num">07</div>
+      <div class="pipe-name">Infinity Tech</div>
+      <div class="pipe-seg">Tecnologia</div>
+    </div>
+    <div class="pipe-card">
+      <div class="pipe-num">08</div>
+      <div class="pipe-name">Zoomlion</div>
+      <div class="pipe-seg">Equipamentos pesados</div>
+    </div>
+  </div>
+  <div class="pn">04</div>
+</div>
+
+<!-- 5. OTIMIZAÇÕES -->
+<div class="slide">
+  <div class="sec-label">Google Ads — Semana 11–13/05</div>
+  <div class="sec-title">O que foi feito nas<br><span>campanhas</span></div>
+  <div class="optim-list">
+    <div class="optim-item">
+      <div class="optim-icon oi-blue">🎯</div>
+      <div class="optim-body">
+        <div class="optim-title">Estratégia de lances — Maximizar Conversões → Maximizar Cliques</div>
+        <div class="optim-desc">O algoritmo entrou em fase de reaprendizado após instabilidade. A mudança permite reacumular dados de qualidade antes de voltar a otimizar para conversão, evitando desperdício de orçamento.</div>
+      </div>
+    </div>
+    <div class="optim-item">
+      <div class="optim-icon oi-purple">🚫</div>
+      <div class="optim-body">
+        <div class="optim-title">+100 palavras-chave negativas adicionadas</div>
+        <div class="optim-desc">Incluídos nomes de concorrentes e termos sem relação com o perfil ICP da DFT. Resultado: redução de exibições para buscas sem potencial de conversão.</div>
+      </div>
+    </div>
+    <div class="optim-item">
+      <div class="optim-icon oi-green">🔒</div>
+      <div class="optim-body">
+        <div class="optim-title">Correspondência ampla → Correspondência exata</div>
+        <div class="optim-desc">Anúncios agora aparecem apenas para buscas diretamente alinhadas ao serviço da DFT, aumentando a relevância e reduzindo o custo por clique desperdiçado.</div>
+      </div>
+    </div>
+    <div class="optim-item">
+      <div class="optim-icon oi-amber">✨</div>
+      <div class="optim-body">
+        <div class="optim-title">Novo anúncio responsivo criado</div>
+        <div class="optim-desc">Adicionado um segundo anúncio no grupo principal para ampliar combinações testadas pelo Google e recuperar tração de entrega após queda de desempenho.</div>
+      </div>
+    </div>
+  </div>
+  <div class="pn">05</div>
+</div>
+
+<!-- 6. INSIGHT META -->
+<div class="slide">
+  <div class="sec-label">Meta Ads — Insight</div>
+  <div class="sec-title">Campanhas de visitas<br><span>gerando leads reais</span></div>
+  <div class="insight-box" style="margin-bottom:28px;">
+    <div class="insight-num">2</div>
+    <div class="insight-label">leads vieram das campanhas de visitas ao perfil do Instagram</div>
+    <div class="insight-desc">Os leads de Werner Alimentos e Bruno Fagundes (VetBR) chegaram via Instagram, originados pelas campanhas de visitas ao perfil do Meta. Isso valida que a estratégia de visibilidade de marca no topo do funil está gerando demanda real para a DFT.</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px 20px;">
+      <div style="font-size:.65rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#5c6bc0;margin-bottom:8px;">O que esses leads têm em comum</div>
+      <div style="font-size:.8rem;color:rgba(255,255,255,.65);line-height:1.6;">Chegaram sem uma busca ativa no Google — encontraram a DFT pelo Instagram. Demonstra que a presença de marca está criando intenção de compra mesmo antes da fase de pesquisa.</div>
+    </div>
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px 20px;">
+      <div style="font-size:.65rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#5c6bc0;margin-bottom:8px;">Próxima ação recomendada</div>
+      <div style="font-size:.8rem;color:rgba(255,255,255,.65);line-height:1.6;">Manter e escalar criativos com melhor Hook Rate e Retenção. O anúncio AD06_Caminhão apresenta os melhores indicadores e tem potencial para amplificação.</div>
+    </div>
+  </div>
+  <div class="pn">06</div>
+</div>
+
+<!-- 7. ALINHAMENTO MQL -->
+<div class="slide">
+  <div class="sec-label">Alinhamento interno</div>
+  <div class="sec-title">Critérios de <span>MQL</span><br>para otimização de campanhas</div>
+  <div style="background:rgba(92,107,192,.08);border:1px solid rgba(92,107,192,.2);border-radius:14px;padding:18px 24px;margin-bottom:24px;font-size:.8rem;color:rgba(255,255,255,.65);line-height:1.6;">
+    <strong style="color:#7986cb;">Processo correto:</strong> primeiro filtro MQL (marketing), depois filtro SQL (comercial/recorrência). O feedback dos leads deve ser compartilhado com o marketing para otimizar campanhas e segmentação de audiência.
+  </div>
+  <div class="mql-grid">
+    <div class="mql-item">
+      <div class="mql-icon">💰</div>
+      <div class="mql-label">Faturamento potencial</div>
+      <div class="mql-val">Mínimo R$ 30.000</div>
+    </div>
+    <div class="mql-item">
+      <div class="mql-icon">🏢</div>
+      <div class="mql-label">Porte da empresa</div>
+      <div class="mql-val">Médio a Grande Porte</div>
+    </div>
+    <div class="mql-item">
+      <div class="mql-icon">📍</div>
+      <div class="mql-label">Regiões de atendimento</div>
+      <div class="mql-val">SP · Sul · RJ</div>
+    </div>
+    <div class="mql-item">
+      <div class="mql-icon">🏭</div>
+      <div class="mql-label">Segmentos prioritários</div>
+      <div class="mql-val">Eletrônicos, hospitalar, médicos, automotivo, premium</div>
+    </div>
+    <div class="mql-item">
+      <div class="mql-icon">🚚</div>
+      <div class="mql-label">Tipo de operação</div>
+      <div class="mql-val">Cargas Fracionadas e Dedicadas</div>
+    </div>
+    <div class="mql-item">
+      <div class="mql-icon">🔁</div>
+      <div class="mql-label">Recorrência</div>
+      <div class="mql-val">Critério SQL — avaliado pelo comercial após MQL confirmado</div>
+    </div>
+  </div>
+  <div class="pn">07</div>
+</div>
+
+<!-- 8. PRÓXIMOS PASSOS -->
+<div class="slide">
+  <div class="sec-label">Agenda</div>
+  <div class="sec-title">Próximos <span>passos</span></div>
+  <div class="next-list">
+    <div class="next-item">
+      <div class="next-n">1</div>
+      <div class="next-text"><strong>VetBR Saúde Animal</strong> — avançar com qualificação comercial (SQL) e proposta. Lead quente, alta aderência.</div>
+    </div>
+    <div class="next-item">
+      <div class="next-n">2</div>
+      <div class="next-text"><strong>Werner Alimentos</strong> — confirmar resultado da reunião de qualificação e definir próximos passos.</div>
+    </div>
+    <div class="next-item">
+      <div class="next-n">3</div>
+      <div class="next-text"><strong>Cisbra Agroindustrial + Tranter</strong> — novas tentativas de contato e atualização de status para o marketing.</div>
+    </div>
+    <div class="next-item">
+      <div class="next-n">4</div>
+      <div class="next-text"><strong>Google Ads</strong> — monitorar reaprendizado do algoritmo nos próximos dias. Retorno ao Maximizar Conversões após estabilização.</div>
+    </div>
+    <div class="next-item">
+      <div class="next-n">5</div>
+      <div class="next-text"><strong>Alinhamento MQL→SQL</strong> — compartilhar feedback dos leads com o marketing para refinar segmentação e otimizar campanhas.</div>
+    </div>
+  </div>
+  <div class="pn">08</div>
+</div>
+
+<!-- 9. COMPARAÇÃO COM DASHBOARD — SIMULADOR -->
+<div class="slide" id="simSlide">
+  <div class="sec-label">Simulador de Orçamento — ao vivo</div>
+  <div class="sec-title">Cenário atual vs <span>propostas de verba</span></div>
+  <div id="simLoading" style="color:rgba(255,255,255,.4);font-size:.85rem;padding:40px 0;">Buscando dados da planilha...</div>
+  <div id="simCompare" style="display:none;">
+    <div id="simCampCards" style="display:flex;flex-direction:column;gap:28px;"></div>
+  </div>
+  <div style="margin-top:24px;background:rgba(92,107,192,.08);border:1px solid rgba(92,107,192,.2);border-radius:12px;padding:14px 20px;font-size:.75rem;color:rgba(255,255,255,.55);line-height:1.6;">
+    <strong style="color:#7986cb;">Como ler:</strong> cada linha mostra quanto investir por dia para recuperar parcialmente as impressões perdidas por orçamento. "Leads extras/mês" é calculado com base no CPL histórico da campanha.
+  </div>
+  <div class="pn">09</div>
+</div>
+
+<div class="brand-footer">Cardô Marketing · DFT Logística · Maio 2026</div>
+
+<script>
+(function(){
+  var SID="17CuuYKxf13NHpJHRAZPoGW9_1Ni_xnIcVTeDQHXb5yQ",GG="550644796";
+  function csvURL(gid){return"https://docs.google.com/spreadsheets/d/"+SID+"/gviz/tq?tqx=out:csv&gid="+gid;}
+  function sp(l){var p=[],c="",q=false;for(var i=0;i<l.length;i++){var ch=l[i];if(ch==='"')q=!q;else if(ch===','&&!q){p.push(c.trim().replace(/^"|"$/g,''));c='';}else c+=ch;}p.push(c.trim().replace(/^"|"$/g,''));return p;}
+  function brlP(s){return parseFloat(String(s).replace(/R\$\s*/,'').replace(/\./g,'').replace(',','.'))||0;}
+  function intP(s){return parseInt(String(s).replace(/[.,]/g,''))||0;}
+  function pctP(s){return parseFloat(String(s).replace('%','').replace(',','.'))||0;}
+  function BRL(v){return'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+
+  fetch(csvURL(GG)).then(function(r){return r.text();}).then(function(txt){
+    var rows=[];
+    txt.split('\n').slice(1).forEach(function(l){
+      if(!l.trim())return;
+      var p=sp(l);if(p.length<6)return;
+      var d=p[0].split('/');if(d.length!==3)return;
+      var date=d[2]+'-'+d[1]+'-'+d[0];
+      var camp=p[1].indexOf('Branding')>=0?'Branding':p[1].indexOf('Demanda')>=0?'Demanda Ativa':p[1].indexOf('Segmentos')>=0?'Segmentos':null;
+      if(!camp)return;
+      rows.push({date:date,camp:camp,invest:brlP(p[2]),imp:intP(p[3]),clk:intP(p[4]),leads:intP(p[5]),is_budget:p.length>6?pctP(p[6]):0,is_quality:p.length>7?pctP(p[7]):0,is_won:p.length>8?pctP(p[8]):0});
+    });
+
+    var camps={
+      'Branding':{label:'Campanha de Marca',color:'#3b82f6',grad:'linear-gradient(90deg,#1877f2,#42a5f5)'},
+      'Demanda Ativa':{label:'Demanda Ativa',color:'#818cf8',grad:'linear-gradient(90deg,#1a73e8,#818cf8)'},
+      'Segmentos':{label:'Segmentos ICP',color:'#34d399',grad:'linear-gradient(90deg,#34a853,#34d399)'}
+    };
+    var scenarios=[
+      {label:'Conservador +15%',inc:0.15,color:'#3b82f6'},
+      {label:'Moderado +30%',inc:0.30,color:'#a78bfa'},
+      {label:'Crescimento +50%',inc:0.50,color:'#34d399'}
+    ];
+
+    var html='';
+    Object.keys(camps).forEach(function(k){
+      var info=camps[k];
+      var r=rows.filter(function(x){return x.camp===k;});
+      if(!r.length)return;
+      var days=new Set(r.map(function(x){return x.date;})).size||1;
+      var totalSpend=r.reduce(function(s,x){return s+x.invest;},0);
+      var totalLeads=r.reduce(function(s,x){return s+x.leads;},0);
+      var avgSpend=totalSpend/days;
+      var avgIsWon=r.reduce(function(s,x){return s+(x.is_won||0);},0)/r.length;
+      var avgIsBudget=r.reduce(function(s,x){return s+(x.is_budget||0);},0)/r.length;
+      var avgIsQual=r.reduce(function(s,x){return s+(x.is_quality||0);},0)/r.length;
+      var gap=avgIsWon>0?avgSpend*(avgIsWon+avgIsBudget)/avgIsWon-avgSpend:0;
+      var cpl=totalLeads>0?totalSpend/totalLeads:0;
+
+      html+='<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;">';
+      html+='<div style="height:3px;background:'+info.grad+'"></div>';
+      html+='<div style="padding:20px 24px;">';
+      html+='<div style="font-size:.65rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:4px;">Google Ads</div>';
+      html+='<div style="font-size:1rem;font-weight:900;color:#fff;margin-bottom:16px;">'+info.label+'</div>';
+
+      // situacao atual
+      html+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;">';
+      html+='<div style="background:rgba(255,255,255,.05);border-radius:10px;padding:12px 14px;"><div style="font-size:.58rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.35);">Gasto atual/dia</div><div style="font-size:.92rem;font-weight:900;color:#fff;margin-top:4px;">'+BRL(avgSpend)+'</div></div>';
+      html+='<div style="background:rgba(52,211,153,.08);border-radius:10px;padding:12px 14px;"><div style="font-size:.58rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(52,211,153,.5);">IS capturada</div><div style="font-size:.92rem;font-weight:900;color:#34d399;margin-top:4px;">'+avgIsWon.toFixed(1)+'%</div></div>';
+      html+='<div style="background:rgba(239,68,68,.08);border-radius:10px;padding:12px 14px;"><div style="font-size:.58rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(239,68,68,.5);">Perd. por verba</div><div style="font-size:.92rem;font-weight:900;color:#f87171;margin-top:4px;">'+avgIsBudget.toFixed(1)+'%</div></div>';
+      html+='<div style="background:rgba(245,158,11,.08);border-radius:10px;padding:12px 14px;"><div style="font-size:.58rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(245,158,11,.5);">Perd. qualidade</div><div style="font-size:.92rem;font-weight:900;color:#f59e0b;margin-top:4px;">'+avgIsQual.toFixed(1)+'%</div></div>';
+      html+='</div>';
+
+      // cenarios
+      html+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">';
+      scenarios.forEach(function(sc){
+        var extraDay=avgSpend*sc.inc;
+        var newBudget=avgSpend+extraDay;
+        var gapPct=gap>0?Math.min(extraDay/gap,1):0;
+        var newIs=avgIsWon+avgIsBudget*gapPct;
+        var extraMonth=cpl>0?Math.round(extraDay*30/cpl):0;
+        html+='<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;">';
+        html+='<div style="font-size:.65rem;font-weight:900;color:'+sc.color+';margin-bottom:10px;">'+sc.label+'</div>';
+        html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;"><span style="font-size:.68rem;color:rgba(255,255,255,.4);">Novo orçamento/dia</span><span style="font-size:.82rem;font-weight:900;color:'+sc.color+';">'+BRL(newBudget)+'</span></div>';
+        html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;"><span style="font-size:.68rem;color:rgba(255,255,255,.4);">Extra/dia</span><span style="font-size:.82rem;font-weight:800;color:#fff;">+'+BRL(extraDay)+'</span></div>';
+        html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;"><span style="font-size:.68rem;color:rgba(255,255,255,.4);">IS projetada</span><span style="font-size:.82rem;font-weight:800;color:#34d399;">'+newIs.toFixed(1)+'%</span></div>';
+        if(extraMonth>0)html+='<div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:.68rem;color:rgba(255,255,255,.4);">Leads extras/mês</span><span style="font-size:.82rem;font-weight:900;color:#34d399;">+'+extraMonth+'</span></div>';
+        html+='<div style="margin-top:10px;background:rgba(255,255,255,.04);border-radius:8px;padding:8px 10px;font-size:.65rem;color:rgba(255,255,255,.35);">Custo mensal: '+BRL(newBudget*30)+'</div>';
+        html+='</div>';
+      });
+      html+='</div></div></div>';
+    });
+
+    document.getElementById('simLoading').style.display='none';
+    document.getElementById('simCampCards').innerHTML=html;
+    document.getElementById('simCompare').style.display='block';
+  }).catch(function(e){
+    document.getElementById('simLoading').textContent='Erro ao buscar dados. Verifique conexão.';
+  });
+})();
+</script>
+
+</body>
+</html>
