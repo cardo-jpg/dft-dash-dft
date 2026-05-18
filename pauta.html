@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pauta — DFT Logística | 19/05/2026</title>
+<title>Pauta — DFT Logística | 18/05/2026</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'Segoe UI',system-ui,sans-serif;background:#050d2e;color:#e8eaf6;min-height:100vh;}
@@ -111,8 +111,8 @@
 <div class="slide cover">
   <div class="cover-label">Cardô Marketing × DFT Logística</div>
   <div class="cover-title">Relatório Semanal<br><span>Leads + Campanhas</span></div>
-  <div class="cover-sub">Período: 11 a 18 de maio de 2026</div>
-  <div class="cover-date">Reunião — 19/05/2026</div>
+  <div class="cover-sub">Período: 11 a 17 de maio de 2026</div>
+  <div class="cover-date">Reunião — 18/05/2026</div>
   <div class="pn">01</div>
 </div>
 
@@ -437,6 +437,7 @@
       var date=d[2]+'-'+d[1]+'-'+d[0];
       var camp=p[1].indexOf('Branding')>=0?'Branding':p[1].indexOf('Demanda')>=0?'Demanda Ativa':p[1].indexOf('Segmentos')>=0?'Segmentos':null;
       if(!camp)return;
+      if(date>'2026-05-17')return;
       rows.push({date:date,camp:camp,invest:brlP(p[2]),imp:intP(p[3]),clk:intP(p[4]),leads:intP(p[5]),is_budget:p.length>6?pctP(p[6]):0,is_quality:p.length>7?pctP(p[7]):0,is_won:p.length>8?pctP(p[8]):0});
     });
 
