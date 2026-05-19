@@ -188,6 +188,15 @@
       <div class="lead-status">Demandas pontuais ou sem aderência ao perfil de cliente ideal (ICP)</div>
     </div>
   </div>
+
+  <!-- faixa comparação com dash -->
+  <div style="margin-top:28px;border-top:1px solid rgba(255,255,255,.06);padding-top:20px;">
+    <div style="font-size:.62rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#5c6bc0;margin-bottom:14px;">Cruzamento com a dashboard — Google Ads 11–17/05</div>
+    <div id="leadCruz" style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;">
+      <div style="color:rgba(255,255,255,.3);font-size:.75rem;grid-column:1/-1;">Buscando dados...</div>
+    </div>
+  </div>
+
   <div class="pn">02</div>
 </div>
 
@@ -453,6 +462,48 @@
 <div class="brand-footer">Cardô Marketing · DFT Logística · Maio 2026</div>
 
 <script>
+// ── cruzamento leads slide 02 ──────────────────────────────────────────
+(function(){
+  var SID="17CuuYKxf13NHpJHRAZPoGW9_1Ni_xnIcVTeDQHXb5yQ",GG="550644796";
+  function csvURL(gid){return"https://docs.google.com/spreadsheets/d/"+SID+"/gviz/tq?tqx=out:csv&gid="+gid;}
+  function sp(l){var p=[],c="",q=false;for(var i=0;i<l.length;i++){var ch=l[i];if(ch==='"')q=!q;else if(ch===','&&!q){p.push(c.trim().replace(/^"|"$/g,''));c='';}else c+=ch;}p.push(c.trim().replace(/^"|"$/g,''));return p;}
+  function brlP(s){return parseFloat(String(s).replace(/R\$\s*/,'').replace(/\./g,'').replace(',','.'))||0;}
+  function intP(s){return parseInt(String(s).replace(/[.,]/g,''))||0;}
+  function BRL(v){return'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function mk(lbl,val,sub,color){
+    return '<div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 16px;">'
+      +'<div style="font-size:.58rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:6px;">'+lbl+'</div>'
+      +'<div style="font-size:1.1rem;font-weight:900;color:'+(color||'#fff')+';line-height:1;">'+val+'</div>'
+      +(sub?'<div style="font-size:.65rem;color:rgba(255,255,255,.35);margin-top:4px;">'+sub+'</div>':'')
+      +'</div>';
+  }
+  fetch(csvURL(GG)).then(function(r){return r.text();}).then(function(txt){
+    var rows=[];
+    txt.split('\n').slice(1).forEach(function(l){
+      if(!l.trim())return;
+      var p=sp(l);if(p.length<6)return;
+      var d=p[0].split('/');if(d.length!==3)return;
+      var date=d[2]+'-'+d[1]+'-'+d[0];
+      if(date<'2026-05-11'||date>'2026-05-17')return;
+      rows.push({invest:brlP(p[2]),clk:intP(p[4]),leads:intP(p[5])});
+    });
+    var invest=rows.reduce(function(s,r){return s+r.invest;},0);
+    var clk=rows.reduce(function(s,r){return s+r.clk;},0);
+    var leads=rows.reduce(function(s,r){return s+r.leads;},0);
+    var cpl=leads>0?invest/leads:0;
+    var cpc=clk>0?invest/clk:0;
+    var html=mk('Investido no período',BRL(invest),'Google Ads','#7986cb')
+      +mk('Cliques',clk.toLocaleString('pt-BR'),'CTR médio','#63b3ed')
+      +mk('Leads registrados (GA)',leads,'Rastreados pelo pixel',leads>0?'#34d399':'#f87171')
+      +mk('CPL médio',cpl>0?BRL(cpl):'—','Custo por lead','#a78bfa')
+      +mk('CPC médio',BRL(cpc),'Custo por clique','#f59e0b');
+    document.getElementById('leadCruz').innerHTML=html;
+  }).catch(function(){
+    document.getElementById('leadCruz').innerHTML='<div style="color:rgba(255,255,255,.3);font-size:.75rem;">Erro ao buscar dados.</div>';
+  });
+})();
+
+// ── simulador ──────────────────────────────────────────────────────────
 (function(){
   var SID="17CuuYKxf13NHpJHRAZPoGW9_1Ni_xnIcVTeDQHXb5yQ",GG="550644796";
   function csvURL(gid){return"https://docs.google.com/spreadsheets/d/"+SID+"/gviz/tq?tqx=out:csv&gid="+gid;}
