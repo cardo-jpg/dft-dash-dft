@@ -492,11 +492,22 @@
     var leads=rows.reduce(function(s,r){return s+r.leads;},0);
     var cpl=leads>0?invest/leads:0;
     var cpc=clk>0?invest/clk:0;
-    var html=mk('Investido no período',BRL(invest),'Google Ads','#7986cb')
-      +mk('Cliques',clk.toLocaleString('pt-BR'),'CTR médio','#63b3ed')
-      +mk('Leads registrados (GA)',leads,'Rastreados pelo pixel',leads>0?'#34d399':'#f87171')
-      +mk('CPL médio',cpl>0?BRL(cpl):'—','Custo por lead','#a78bfa')
-      +mk('CPC médio',BRL(cpc),'Custo por clique','#f59e0b');
+    var cpl6=invest/6;
+    function row(label,leadsN,cplN,color,note){
+      return '<div style="display:contents;">'
+        +mk('Investido no período',BRL(invest),'Google Ads','#7986cb')
+        +mk('Cliques',clk.toLocaleString('pt-BR'),'CTR médio','#63b3ed')
+        +mk('Leads '+label,leadsN,note,color)
+        +mk('CPL médio',BRL(cplN),'Custo por lead','#a78bfa')
+        +mk('CPC médio',BRL(cpc),'Custo por clique','#f59e0b')
+        +'</div>';
+    }
+    var html='<div style="grid-column:1/-1;font-size:.6rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3);padding-bottom:4px;">Cenário 1 — rastreados pelo pixel</div>'
+      +row('registrados (GA)',leads,cpl,leads>0?'#34d399':'#f87171','Rastreados pelo pixel')
+      +'<div style="grid-column:1/-1;height:1px;background:rgba(255,255,255,.06);margin:4px 0;"></div>'
+      +'<div style="grid-column:1/-1;font-size:.6rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3);padding-bottom:4px;">Cenário 2 — todos os leads confirmados</div>'
+      +row('confirmados',6,cpl6,'#34d399','Google Ads + Meta + direto');
+    document.getElementById('leadCruz').style.gridTemplateColumns='repeat(5,1fr)';
     document.getElementById('leadCruz').innerHTML=html;
   }).catch(function(){
     document.getElementById('leadCruz').innerHTML='<div style="color:rgba(255,255,255,.3);font-size:.75rem;">Erro ao buscar dados.</div>';
