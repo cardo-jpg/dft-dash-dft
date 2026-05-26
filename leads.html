@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DFT Logística — Relatório de Leads</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#f0f3ff; --card:#ffffff; --brd:#d5dcf0;
+  --or:#2621bf; --wh:#0c1d73; --mu:#6272a0;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--wh);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(38,33,191,0.04) 38px,rgba(38,33,191,0.04) 40px);pointer-events:none;z-index:0;}
+
+.gl{height:3px;background:linear-gradient(90deg,#2621bf,#4285f4,#34a853,#f59e0b,#2621bf);background-size:300% 100%;}
+
+header{position:relative;z-index:1;background:linear-gradient(135deg,#0c1d73,#1d1f96);}
+.hi{max-width:1300px;margin:0 auto;padding:28px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.ht .brand span{font-size:.88rem;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:1.5px;text-transform:uppercase;}
+.ht h1{font-size:1.76rem;font-weight:900;color:#fff;line-height:1.1;}
+.ht h1 span{color:#6b8aff;}
+.ht p{font-size:.98rem;color:rgba(255,255,255,.55);margin-top:4px;}
+.period-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:8px 16px;font-size:.91rem;font-weight:700;color:rgba(255,255,255,.8);}
+.period-badge::before{content:'📅';}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:.91rem;font-weight:700;color:rgba(255,255,255,.7);text-decoration:none;border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:8px 16px;transition:all .2s;}
+.back-link:hover{background:rgba(255,255,255,.1);color:#fff;}
+
+main{position:relative;z-index:1;max-width:1300px;margin:0 auto;padding:36px 36px 100px;}
+
+.slbl{font-size:.85rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:#0c1d73;display:flex;align-items:center;gap:12px;margin-bottom:22px;margin-top:44px;}
+.slbl:first-child{margin-top:0;}
+.slbl::after{content:'';flex:1;height:1px;background:var(--brd);}
+
+/* resumo cards */
+.sum-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:32px;}
+.sum-card{background:#fff;border:1px solid var(--brd);border-radius:14px;padding:20px 18px;position:relative;overflow:hidden;text-align:center;}
+.sum-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0;}
+.sum-card.c-blue::before{background:#2621bf;}
+.sum-card.c-green::before{background:#34a853;}
+.sum-card.c-amber::before{background:#f59e0b;}
+.sum-card.c-red::before{background:#ea4335;}
+.sum-card.c-indigo::before{background:#6366f1;}
+.sum-lbl{font-size:.78rem;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.sum-val{font-size:2rem;font-weight:900;color:var(--wh);}
+.sum-sub{font-size:.78rem;color:var(--mu);margin-top:4px;}
+
+/* tabela */
+.tbl-wrap{background:#fff;border:1px solid var(--brd);border-radius:16px;overflow:hidden;}
+table{width:100%;border-collapse:collapse;}
+thead tr{background:linear-gradient(135deg,#0c1d73,#1d1f96);}
+thead th{padding:16px 14px;text-align:left;font-size:.82rem;font-weight:800;color:rgba(255,255,255,.85);letter-spacing:.5px;white-space:nowrap;}
+tbody tr{border-bottom:1px solid #eef0f8;transition:background .15s;}
+tbody tr:last-child{border-bottom:none;}
+tbody tr:hover{background:#f7f9ff;}
+tbody td{padding:14px 14px;font-size:.88rem;color:var(--wh);vertical-align:top;}
+td.empresa{font-weight:800;font-size:.94rem;}
+td.contato{color:var(--mu);font-size:.84rem;}
+td.seg{font-size:.84rem;}
+td.obs{font-size:.82rem;color:var(--mu);line-height:1.4;}
+
+/* badges */
+.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:.75rem;font-weight:800;letter-spacing:.3px;white-space:nowrap;}
+.b-green{background:rgba(52,168,83,.12);color:#1e7e34;border:1px solid rgba(52,168,83,.3);}
+.b-amber{background:rgba(245,158,11,.12);color:#b45309;border:1px solid rgba(245,158,11,.3);}
+.b-red{background:rgba(234,67,53,.1);color:#c0392b;border:1px solid rgba(234,67,53,.25);}
+.b-blue{background:rgba(38,33,191,.1);color:#2621bf;border:1px solid rgba(38,33,191,.25);}
+.b-gray{background:rgba(98,114,160,.1);color:#4a5568;border:1px solid rgba(98,114,160,.25);}
+.b-purple{background:rgba(139,92,246,.1);color:#6d28d9;border:1px solid rgba(139,92,246,.3);}
+
+.date{font-size:.8rem;color:var(--mu);font-weight:700;}
+.canal{font-size:.8rem;font-weight:700;color:var(--mu);}
+
+footer{position:relative;z-index:1;text-align:center;padding:32px;font-size:.85rem;color:var(--mu);}
+</style>
+</head>
+<body>
+<div class="gl"></div>
+<header>
+  <div class="hi">
+    <div class="ht">
+      <div class="brand"><span>Cardô Marketing × DFT Logística</span></div>
+      <h1>Relatório de <span>Leads</span></h1>
+      <p>Entrada e qualificação de oportunidades comerciais</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end;">
+      <div class="period-badge">18/05 — 26/05/2026</div>
+      <a href="relatorio.html" class="back-link">← Relatório de Campanhas</a>
+    </div>
+  </div>
+</header>
+<div class="gl"></div>
+
+<main>
+  <div class="slbl">Resumo do período</div>
+  <div class="sum-grid">
+    <div class="sum-card c-blue">
+      <div class="sum-lbl">Total de leads</div>
+      <div class="sum-val">10</div>
+      <div class="sum-sub">18 a 26/05</div>
+    </div>
+    <div class="sum-card c-green">
+      <div class="sum-lbl">Potencial recorrente</div>
+      <div class="sum-val">3</div>
+      <div class="sum-sub">Identita · BRL · Alves Ribeiro</div>
+    </div>
+    <div class="sum-card c-amber">
+      <div class="sum-lbl">Em negociação</div>
+      <div class="sum-val">2</div>
+      <div class="sum-sub">Bovmeat · Mathis</div>
+    </div>
+    <div class="sum-card c-red">
+      <div class="sum-lbl">Baixa aderência</div>
+      <div class="sum-val">4</div>
+      <div class="sum-sub">Eurotechniker · Nor Import · BS Seg · P.C. Rachel</div>
+    </div>
+    <div class="sum-card c-indigo">
+      <div class="sum-lbl">Destaque</div>
+      <div class="sum-val" style="font-size:1.1rem;margin-top:4px;">BRL Dist.</div>
+      <div class="sum-sub">Fat. R$5MM · Em negociação</div>
+    </div>
+  </div>
+
+  <div class="slbl">Leads recebidos — 18 a 26/05/2026</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Empresa</th>
+          <th>Contato</th>
+          <th>Segmento</th>
+          <th>Entrada</th>
+          <th>1º contato</th>
+          <th>Canal</th>
+          <th>Status</th>
+          <th>Observações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="empresa">Natalia Venancio<br><span style="font-size:.8rem;font-weight:600;color:#6272a0;">EUROTECHNIKER</span></td>
+          <td class="contato">Miguel<br>62982864791</td>
+          <td class="seg">Varejo eletrodomésticos</td>
+          <td><span class="date">18/05</span></td>
+          <td><span class="date">18/05</span></td>
+          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td><span class="badge b-red">Baixa aderência</span></td>
+          <td class="obs">Frete GO → João Pessoa · Empresa de pequeno porte</td>
+        </tr>
+        <tr>
+          <td class="empresa">EUROTECHNIKER</td>
+          <td class="contato">Aline<br>11989153666</td>
+          <td class="seg">Equipamentos industriais</td>
+          <td><span class="date">20/05</span></td>
+          <td><span class="date">20/05</span></td>
+          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td><span class="badge b-red">Sem aderência</span></td>
+          <td class="obs">Demandas esporádicas · Cotação a cotação</td>
+        </tr>
+        <tr>
+          <td class="empresa">IDENTITA COSMÉTICOS</td>
+          <td class="contato">Vera Gomes<br>11993257711</td>
+          <td class="seg">Cosméticos</td>
+          <td><span class="date">18/05</span></td>
+          <td><span class="date">20/05</span></td>
+          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td><span class="badge b-green">Potencial recorrente</span></td>
+          <td class="obs">Cliente pequeno porte · Recorrência identificada</td>
+        </tr>
+        <tr style="background:#fffbf0;">
+          <td class="empresa">BRL Distribuidora<br><span style="font-size:.8rem;font-weight:600;color:#6272a0;">Pneus e Moto Peças</span></td>
+          <td class="contato">Daniela<br>11978027034</td>
+          <td class="seg">Pneus e auto peças</td>
+          <td><span class="date">20/05</span></td>
+          <td><span class="date">21/05</span></td>
+          <td><span class="canal">E-mail → Telefone</span></td>
+          <td><span class="badge b-amber">Em negociação</span></td>
+          <td class="obs">⭐ Faturamento R$5 milhões · Aguardando volumetria</td>
+        </tr>
+        <tr>
+          <td class="empresa">Nor Import</td>
+          <td class="contato">Fernando<br>11962833948</td>
+          <td class="seg">Alimentos e Bebidas</td>
+          <td><span class="date">21/05</span></td>
+          <td><span class="date">21/05</span></td>
+          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td><span class="badge b-gray">Sem retorno</span></td>
+          <td class="obs">Tentativa de contato · Aguardando interação</td>
+        </tr>
+        <tr>
+          <td class="empresa">Bovmeat</td>
+          <td class="contato">Liliana<br>11999486582</td>
+          <td class="seg">Carnes e Derivados</td>
+          <td><span class="date">25/05</span></td>
+          <td><span class="date">25/05</span></td>
+          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td><span class="badge b-amber">Bid em andamento</span></td>
+          <td class="obs">Parcial aderência · Atendimento apenas para insumos/alimento</td>
+        </tr>
+        <tr>
+          <td class="empresa">Mathis</td>
+          <td class="contato">Juliana<br>11992165875</td>
+          <td class="seg">Têxtil</td>
+          <td><span class="date">25/05</span></td>
+          <td><span class="date">25/05</span></td>
+          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td><span class="badge b-amber">Bid em andamento</span></td>
+          <td class="obs">Parcial aderência · 95% FOB</td>
+        </tr>
+        <tr>
+          <td class="empresa">ALVES RIBEIRO</td>
+          <td class="contato">Jhon Wilkers<br>94981285575</td>
+          <td class="seg">Construtora</td>
+          <td><span class="date">22/05</span></td>
+          <td><span class="date">25/05</span></td>
+          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td><span class="badge b-blue">Em sondagem</span></td>
+          <td class="obs">Obra rodoviária SP-294 · Entregas de equipamentos e peças</td>
+        </tr>
+        <tr>
+          <td class="empresa">BS Seg</td>
+          <td class="contato">Pedro Alma<br>14991191041</td>
+          <td class="seg">Eletrônicos</td>
+          <td><span class="date">21/05</span></td>
+          <td><span class="date">22/05</span></td>
+          <td><span class="canal">E-mail → Ligação</span></td>
+          <td><span class="badge b-red">Sem potencial</span></td>
+          <td class="obs">Cotação avulsa · 4 lojas</td>
+        </tr>
+        <tr>
+          <td class="empresa">Paulo Cesar Rachel Junior</td>
+          <td class="contato">Paulo Cesar<br>12992218679</td>
+          <td class="seg">Outros</td>
+          <td><span class="date">26/05</span></td>
+          <td><span class="date">26/05</span></td>
+          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td><span class="badge b-purple">Em contato</span></td>
+          <td class="obs">Apresentação inicial · Aguardando retorno</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<footer>
+  Cardô Marketing · DFT Logística · Período: 18 a 26/05/2026
+</footer>
+</body>
+</html>
