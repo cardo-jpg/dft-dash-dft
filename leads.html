@@ -3,37 +3,30 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>DFT Logística — Relatório de Leads</title>
+<title>DFT Logística — Relatório de Leads 18–26/05</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
-:root{
-  --bg:#f0f3ff; --card:#ffffff; --brd:#d5dcf0;
-  --or:#2621bf; --wh:#0c1d73; --mu:#6272a0;
-}
+:root{--bg:#f0f3ff;--card:#fff;--brd:#d5dcf0;--or:#2621bf;--wh:#0c1d73;--mu:#6272a0;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--wh);min-height:100vh;}
 body::before{content:'';position:fixed;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(38,33,191,0.04) 38px,rgba(38,33,191,0.04) 40px);pointer-events:none;z-index:0;}
-
 .gl{height:3px;background:linear-gradient(90deg,#2621bf,#4285f4,#34a853,#f59e0b,#2621bf);background-size:300% 100%;}
-
 header{position:relative;z-index:1;background:linear-gradient(135deg,#0c1d73,#1d1f96);}
 .hi{max-width:1300px;margin:0 auto;padding:28px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
-.ht .brand span{font-size:.88rem;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:1.5px;text-transform:uppercase;}
+.ht .brand{font-size:.88rem;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;}
 .ht h1{font-size:1.76rem;font-weight:900;color:#fff;line-height:1.1;}
 .ht h1 span{color:#6b8aff;}
 .ht p{font-size:.98rem;color:rgba(255,255,255,.55);margin-top:4px;}
 .period-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:8px 16px;font-size:.91rem;font-weight:700;color:rgba(255,255,255,.8);}
 .period-badge::before{content:'📅';}
-.back-link{display:inline-flex;align-items:center;gap:6px;font-size:.91rem;font-weight:700;color:rgba(255,255,255,.7);text-decoration:none;border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:8px 16px;transition:all .2s;}
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:.88rem;font-weight:700;color:rgba(255,255,255,.7);text-decoration:none;border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:8px 16px;transition:all .2s;}
 .back-link:hover{background:rgba(255,255,255,.1);color:#fff;}
-
 main{position:relative;z-index:1;max-width:1300px;margin:0 auto;padding:36px 36px 100px;}
-
 .slbl{font-size:.85rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:#0c1d73;display:flex;align-items:center;gap:12px;margin-bottom:22px;margin-top:44px;}
 .slbl:first-child{margin-top:0;}
 .slbl::after{content:'';flex:1;height:1px;background:var(--brd);}
 
-/* resumo cards */
+/* summary cards */
 .sum-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:32px;}
 .sum-card{background:#fff;border:1px solid var(--brd);border-radius:14px;padding:20px 18px;position:relative;overflow:hidden;text-align:center;}
 .sum-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:14px 14px 0 0;}
@@ -41,10 +34,58 @@ main{position:relative;z-index:1;max-width:1300px;margin:0 auto;padding:36px 36p
 .sum-card.c-green::before{background:#34a853;}
 .sum-card.c-amber::before{background:#f59e0b;}
 .sum-card.c-red::before{background:#ea4335;}
-.sum-card.c-indigo::before{background:#6366f1;}
+.sum-card.c-star::before{background:linear-gradient(90deg,#f59e0b,#ef4444);}
 .sum-lbl{font-size:.78rem;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
 .sum-val{font-size:2rem;font-weight:900;color:var(--wh);}
-.sum-sub{font-size:.78rem;color:var(--mu);margin-top:4px;}
+.sum-sub{font-size:.78rem;color:var(--mu);margin-top:4px;line-height:1.4;}
+
+/* cruzamento dash */
+.dash-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:12px;}
+.dash-card{background:#fff;border:1px solid var(--brd);border-radius:12px;padding:16px 14px;text-align:center;}
+.dash-lbl{font-size:.72rem;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.dash-val{font-size:1.3rem;font-weight:900;color:var(--wh);}
+.dash-sub{font-size:.72rem;color:var(--mu);margin-top:3px;}
+#dashLoading{color:var(--mu);font-size:.88rem;padding:20px 0;}
+
+/* conclusao box */
+.concl-box{background:#fff;border:1px solid var(--brd);border-radius:16px;padding:28px 32px;margin-bottom:20px;}
+.concl-title{font-size:1.05rem;font-weight:900;color:var(--wh);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.concl-list{display:flex;flex-direction:column;gap:14px;}
+.concl-item{display:flex;gap:14px;align-items:flex-start;}
+.concl-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.ci-green{background:rgba(52,168,83,.12);}
+.ci-amber{background:rgba(245,158,11,.12);}
+.ci-red{background:rgba(234,67,53,.1);}
+.ci-blue{background:rgba(38,33,191,.1);}
+.ci-purple{background:rgba(139,92,246,.1);}
+.concl-body{}
+.concl-name{font-size:.94rem;font-weight:800;color:var(--wh);margin-bottom:3px;}
+.concl-desc{font-size:.85rem;color:var(--mu);line-height:1.5;}
+
+/* destaque lead */
+.destaque-box{background:linear-gradient(135deg,#fffbf0,#fff8e1);border:2px solid #f59e0b;border-radius:16px;padding:24px 28px;margin-bottom:20px;display:flex;gap:24px;align-items:flex-start;}
+.dest-icon{font-size:2rem;flex-shrink:0;}
+.dest-badge{font-size:.65rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#b45309;margin-bottom:6px;}
+.dest-name{font-size:1.3rem;font-weight:900;color:var(--wh);margin-bottom:6px;}
+.dest-desc{font-size:.88rem;color:var(--mu);line-height:1.6;margin-bottom:14px;}
+.dest-metrics{display:flex;gap:16px;flex-wrap:wrap;}
+.dest-m{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:10px;padding:10px 16px;text-align:center;}
+.dest-m-lbl{font-size:.65rem;font-weight:700;text-transform:uppercase;color:#b45309;letter-spacing:1px;}
+.dest-m-val{font-size:.94rem;font-weight:900;color:var(--wh);margin-top:2px;}
+
+/* oportunidades */
+.oport-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.oport-card{background:#fff;border:1px solid var(--brd);border-radius:14px;padding:20px 22px;}
+.oport-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+.oport-name{font-size:.98rem;font-weight:800;color:var(--wh);}
+.oport-seg{font-size:.78rem;color:var(--mu);margin-top:2px;}
+.oport-desc{font-size:.85rem;color:var(--mu);line-height:1.5;border-top:1px solid var(--brd);padding-top:10px;margin-top:10px;}
+
+/* alerta */
+.alert-box{background:#fff8f0;border:1px solid #fcd34d;border-radius:14px;padding:18px 22px;margin-bottom:16px;display:flex;gap:14px;align-items:flex-start;}
+.alert-icon{font-size:1.3rem;flex-shrink:0;}
+.alert-text{font-size:.88rem;color:#92400e;line-height:1.5;}
+.alert-text strong{color:#78350f;}
 
 /* tabela */
 .tbl-wrap{background:#fff;border:1px solid var(--brd);border-radius:16px;overflow:hidden;}
@@ -54,23 +95,19 @@ thead th{padding:16px 14px;text-align:left;font-size:.82rem;font-weight:800;colo
 tbody tr{border-bottom:1px solid #eef0f8;transition:background .15s;}
 tbody tr:last-child{border-bottom:none;}
 tbody tr:hover{background:#f7f9ff;}
-tbody td{padding:14px 14px;font-size:.88rem;color:var(--wh);vertical-align:top;}
+tbody td{padding:14px 14px;font-size:.88rem;color:var(--wh);vertical-align:top;line-height:1.4;}
 td.empresa{font-weight:800;font-size:.94rem;}
 td.contato{color:var(--mu);font-size:.84rem;}
-td.seg{font-size:.84rem;}
 td.obs{font-size:.82rem;color:var(--mu);line-height:1.4;}
 
-/* badges */
-.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:.75rem;font-weight:800;letter-spacing:.3px;white-space:nowrap;}
+.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:.75rem;font-weight:800;white-space:nowrap;}
 .b-green{background:rgba(52,168,83,.12);color:#1e7e34;border:1px solid rgba(52,168,83,.3);}
 .b-amber{background:rgba(245,158,11,.12);color:#b45309;border:1px solid rgba(245,158,11,.3);}
 .b-red{background:rgba(234,67,53,.1);color:#c0392b;border:1px solid rgba(234,67,53,.25);}
 .b-blue{background:rgba(38,33,191,.1);color:#2621bf;border:1px solid rgba(38,33,191,.25);}
 .b-gray{background:rgba(98,114,160,.1);color:#4a5568;border:1px solid rgba(98,114,160,.25);}
 .b-purple{background:rgba(139,92,246,.1);color:#6d28d9;border:1px solid rgba(139,92,246,.3);}
-
 .date{font-size:.8rem;color:var(--mu);font-weight:700;}
-.canal{font-size:.8rem;font-weight:700;color:var(--mu);}
 
 footer{position:relative;z-index:1;text-align:center;padding:32px;font-size:.85rem;color:var(--mu);}
 </style>
@@ -80,9 +117,9 @@ footer{position:relative;z-index:1;text-align:center;padding:32px;font-size:.85r
 <header>
   <div class="hi">
     <div class="ht">
-      <div class="brand"><span>Cardô Marketing × DFT Logística</span></div>
+      <div class="brand">Cardô Marketing × DFT Logística</div>
       <h1>Relatório de <span>Leads</span></h1>
-      <p>Entrada e qualificação de oportunidades comerciais</p>
+      <p>Entrada, qualificação e análise de oportunidades — com cruzamento de campanhas</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end;">
       <div class="period-badge">18/05 — 26/05/2026</div>
@@ -93,6 +130,8 @@ footer{position:relative;z-index:1;text-align:center;padding:32px;font-size:.85r
 <div class="gl"></div>
 
 <main>
+
+  <!-- RESUMO -->
   <div class="slbl">Resumo do período</div>
   <div class="sum-grid">
     <div class="sum-card c-blue">
@@ -101,28 +140,145 @@ footer{position:relative;z-index:1;text-align:center;padding:32px;font-size:.85r
       <div class="sum-sub">18 a 26/05</div>
     </div>
     <div class="sum-card c-green">
-      <div class="sum-lbl">Potencial recorrente</div>
-      <div class="sum-val">3</div>
-      <div class="sum-sub">Identita · BRL · Alves Ribeiro</div>
+      <div class="sum-lbl">Alto potencial</div>
+      <div class="sum-val">2</div>
+      <div class="sum-sub">BRL Dist. · Alves Ribeiro</div>
     </div>
     <div class="sum-card c-amber">
       <div class="sum-lbl">Em negociação</div>
-      <div class="sum-val">2</div>
-      <div class="sum-sub">Bovmeat · Mathis</div>
+      <div class="sum-val">3</div>
+      <div class="sum-sub">BRL · Bovmeat · Mathis</div>
     </div>
     <div class="sum-card c-red">
       <div class="sum-lbl">Baixa aderência</div>
-      <div class="sum-val">4</div>
-      <div class="sum-sub">Eurotechniker · Nor Import · BS Seg · P.C. Rachel</div>
+      <div class="sum-val">5</div>
+      <div class="sum-sub">Sem fit com ICP da DFT</div>
     </div>
-    <div class="sum-card c-indigo">
+    <div class="sum-card c-star">
       <div class="sum-lbl">Destaque</div>
-      <div class="sum-val" style="font-size:1.1rem;margin-top:4px;">BRL Dist.</div>
-      <div class="sum-sub">Fat. R$5MM · Em negociação</div>
+      <div class="sum-val" style="font-size:1.1rem;padding-top:4px;">BRL Dist.</div>
+      <div class="sum-sub">Faturamento R$5MM<br>Em negociação</div>
     </div>
   </div>
 
-  <div class="slbl">Leads recebidos — 18 a 26/05/2026</div>
+  <!-- CRUZAMENTO DASHBOARD -->
+  <div class="slbl">Cruzamento com campanhas — Google Ads 18–26/05</div>
+  <div id="dashLoading">Buscando dados da dashboard...</div>
+  <div id="dashData" style="display:none;">
+    <div class="dash-strip" id="dashStrip"></div>
+    <div class="alert-box" id="dashAlert">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-text" id="dashAlertText"></div>
+    </div>
+  </div>
+
+  <!-- DESTAQUE -->
+  <div class="slbl">Lead em destaque</div>
+  <div class="destaque-box">
+    <div class="dest-icon">⭐</div>
+    <div>
+      <div class="dest-badge">Maior oportunidade do período</div>
+      <div class="dest-name">BRL Distribuidora de Pneus e Moto Peças</div>
+      <div class="dest-desc">Empresa do segmento de pneus e auto peças com faturamento declarado de <strong>R$5 milhões</strong>. Contato feito com Daniela via e-mail em 20/05, retorno por telefone em 21/05 — sinal positivo de interesse. Aguarda volumetria para fechamento da proposta. É o lead com maior potencial de contrato recorrente do período, com boa aderência ao serviço de frete fracionado da DFT.</div>
+      <div class="dest-metrics">
+        <div class="dest-m"><div class="dest-m-lbl">Faturamento</div><div class="dest-m-val">R$5MM</div></div>
+        <div class="dest-m"><div class="dest-m-lbl">Status</div><div class="dest-m-val">Em negociação</div></div>
+        <div class="dest-m"><div class="dest-m-lbl">Segmento</div><div class="dest-m-val">Auto peças</div></div>
+        <div class="dest-m"><div class="dest-m-lbl">Próximo passo</div><div class="dest-m-val">Volumetria</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPORTUNIDADES EM ABERTO -->
+  <div class="slbl">Oportunidades em acompanhamento</div>
+  <div class="oport-grid">
+    <div class="oport-card">
+      <div class="oport-head">
+        <div>
+          <div class="oport-name">Alves Ribeiro Engenharia</div>
+          <div class="oport-seg">Construtora · Obra SP-294</div>
+        </div>
+        <span class="badge b-blue">Em sondagem</span>
+      </div>
+      <div class="oport-desc">Contrato para entregas de equipamentos e peças na obra da rodovia SP-294. Demanda pontual mas de ticket elevado. Jhon Wilkers respondeu via WhatsApp em 25/05 — manter follow-up ativo. <strong>Próximo passo:</strong> entender volume e frequência de entregas na obra.</div>
+    </div>
+    <div class="oport-card">
+      <div class="oport-head">
+        <div>
+          <div class="oport-name">Bovmeat</div>
+          <div class="oport-seg">Carnes e Derivados · Bid em andamento</div>
+        </div>
+        <span class="badge b-amber">Bid aberto</span>
+      </div>
+      <div class="oport-desc">Parcial aderência — atende apenas insumos e alimentício, não o core da operação. Bid em andamento com Liliana. Atenção: se o bid for ganho com baixa margem, pode não compensar. <strong>Próximo passo:</strong> validar se o volume justifica a operação antes de avançar na proposta.</div>
+    </div>
+    <div class="oport-card">
+      <div class="oport-head">
+        <div>
+          <div class="oport-name">Mathis</div>
+          <div class="oport-seg">Têxtil · 95% FOB</div>
+        </div>
+        <span class="badge b-amber">Bid aberto</span>
+      </div>
+      <div class="oport-desc">95% da operação é FOB — o fornecedor é responsável pelo frete até o cliente da Mathis, não a DFT. Aderência parcial. Existe janela de 5% de frete CIF onde a DFT poderia entrar, mas o volume pode ser insuficiente para justificar a operação. <strong>Próximo passo:</strong> quantificar o 5% antes de investir tempo na proposta.</div>
+    </div>
+    <div class="oport-card">
+      <div class="oport-head">
+        <div>
+          <div class="oport-name">IDENTITA Cosméticos</div>
+          <div class="oport-seg">Cosméticos · Recorrência identificada</div>
+        </div>
+        <span class="badge b-green">Potencial recorrente</span>
+      </div>
+      <div class="oport-desc">Apesar do porte pequeno, identificou-se recorrência na demanda — o que é o critério mais importante para a DFT. Vera Gomes respondeu bem ao primeiro contato. <strong>Próximo passo:</strong> validar volume mínimo e frequência de envios antes de formalizar proposta.</div>
+    </div>
+  </div>
+
+  <!-- ANÁLISE E CONCLUSÕES -->
+  <div class="slbl">Análise e conclusões</div>
+  <div class="concl-box">
+    <div class="concl-title">📊 O que os dados revelam</div>
+    <div class="concl-list">
+      <div class="concl-item">
+        <div class="concl-icon ci-red">🎯</div>
+        <div class="concl-body">
+          <div class="concl-name">50% dos leads não têm aderência ao ICP da DFT</div>
+          <div class="concl-desc">5 dos 10 leads recebidos (Eurotechniker x2, Nor Import, BS Seg e Paulo Cesar) têm baixa ou nenhuma aderência — demandas pontuais, porte pequeno ou sem recorrência. Isso indica que as campanhas ainda estão atraindo perfis fora do alvo, mesmo com as otimizações da semana. O filtro MQL precisa ser aplicado com mais rigor antes de repassar para o comercial.</div>
+        </div>
+      </div>
+      <div class="concl-item">
+        <div class="concl-icon ci-amber">⚠️</div>
+        <div class="concl-body">
+          <div class="concl-name">Mathis e Bovmeat entram como bid — risco de proposta sem retorno</div>
+          <div class="concl-desc">Ambos estão em processo de cotação concorrida. Mathis tem 95% FOB, o que significa que a DFT disputaria apenas uma fração da operação. Bovmeat atende só insumos/alimento. Antes de elaborar proposta completa, é recomendável uma triagem rápida de volume para evitar esforço comercial sem conversão.</div>
+        </div>
+      </div>
+      <div class="concl-item">
+        <div class="concl-icon ci-green">✅</div>
+        <div class="concl-body">
+          <div class="concl-name">BRL Distribuidora é o lead mais qualificado do mês</div>
+          <div class="concl-desc">Faturamento de R$5MM, segmento de auto peças (boa aderência ao frete fracionado), resposta rápida por telefone e aguardando apenas volumetria. Esse lead precisa de atenção prioritária do comercial. Uma proposta bem posicionada pode render o contrato mais relevante do mês.</div>
+        </div>
+      </div>
+      <div class="concl-item">
+        <div class="concl-icon ci-blue">📡</div>
+        <div class="concl-body">
+          <div class="concl-name">Canal dominante é e-mail — Google Ads contribui mas não é rastreado integralmente</div>
+          <div class="concl-desc">Todos os 10 leads vieram por e-mail. O Google Ads registrou conversões no período (via pixel), mas o volume real de leads é maior. A diferença se explica por limitações de rastreamento: Safari/iOS bloqueiam pixels, leads que voltam dias depois sem clicar no anúncio não são atribuídos, e ad blockers cortam parte do sinal. O canal está funcionando, mas a atribuição subestima o resultado real.</div>
+        </div>
+      </div>
+      <div class="concl-item">
+        <div class="concl-icon ci-purple">🔍</div>
+        <div class="concl-body">
+          <div class="concl-name">Construtoras e obras como novo vertical a explorar</div>
+          <div class="concl-desc">Alves Ribeiro (obra SP-294) abre um vertical interessante: construtoras precisam de entregas pontuais de equipamentos e peças para obras, que por natureza têm datas críticas e alto senso de urgência. Esse perfil pode ter boa aderência ao serviço dedicado da DFT. Vale testar palavras-chave específicas como "entrega de materiais para obra SP" nas campanhas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABELA COMPLETA -->
+  <div class="slbl">Todos os leads — 18 a 26/05/2026</div>
   <div class="tbl-wrap">
     <table>
       <thead>
@@ -131,7 +287,7 @@ footer{position:relative;z-index:1;text-align:center;padding:32px;font-size:.85r
           <th>Contato</th>
           <th>Segmento</th>
           <th>Entrada</th>
-          <th>1º contato</th>
+          <th>1º Contato</th>
           <th>Canal</th>
           <th>Status</th>
           <th>Observações</th>
@@ -141,110 +297,157 @@ footer{position:relative;z-index:1;text-align:center;padding:32px;font-size:.85r
         <tr>
           <td class="empresa">Natalia Venancio<br><span style="font-size:.8rem;font-weight:600;color:#6272a0;">EUROTECHNIKER</span></td>
           <td class="contato">Miguel<br>62982864791</td>
-          <td class="seg">Varejo eletrodomésticos</td>
+          <td>Varejo eletrodomésticos</td>
           <td><span class="date">18/05</span></td>
           <td><span class="date">18/05</span></td>
-          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td style="font-size:.82rem;">E-mail → WhatsApp</td>
           <td><span class="badge b-red">Baixa aderência</span></td>
           <td class="obs">Frete GO → João Pessoa · Empresa de pequeno porte</td>
         </tr>
         <tr>
           <td class="empresa">EUROTECHNIKER</td>
           <td class="contato">Aline<br>11989153666</td>
-          <td class="seg">Equipamentos industriais</td>
+          <td>Equipamentos industriais</td>
           <td><span class="date">20/05</span></td>
           <td><span class="date">20/05</span></td>
-          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td style="font-size:.82rem;">E-mail → WhatsApp</td>
           <td><span class="badge b-red">Sem aderência</span></td>
           <td class="obs">Demandas esporádicas · Cotação a cotação</td>
         </tr>
         <tr>
-          <td class="empresa">IDENTITA COSMÉTICOS</td>
+          <td class="empresa">IDENTITA Cosméticos</td>
           <td class="contato">Vera Gomes<br>11993257711</td>
-          <td class="seg">Cosméticos</td>
+          <td>Cosméticos</td>
           <td><span class="date">18/05</span></td>
           <td><span class="date">20/05</span></td>
-          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td style="font-size:.82rem;">E-mail → WhatsApp</td>
           <td><span class="badge b-green">Potencial recorrente</span></td>
           <td class="obs">Cliente pequeno porte · Recorrência identificada</td>
         </tr>
         <tr style="background:#fffbf0;">
           <td class="empresa">BRL Distribuidora<br><span style="font-size:.8rem;font-weight:600;color:#6272a0;">Pneus e Moto Peças</span></td>
           <td class="contato">Daniela<br>11978027034</td>
-          <td class="seg">Pneus e auto peças</td>
+          <td>Pneus e auto peças</td>
           <td><span class="date">20/05</span></td>
           <td><span class="date">21/05</span></td>
-          <td><span class="canal">E-mail → Telefone</span></td>
+          <td style="font-size:.82rem;">E-mail → Telefone</td>
           <td><span class="badge b-amber">Em negociação</span></td>
-          <td class="obs">⭐ Faturamento R$5 milhões · Aguardando volumetria</td>
+          <td class="obs">⭐ Faturamento R$5MM · Aguardando volumetria</td>
         </tr>
         <tr>
           <td class="empresa">Nor Import</td>
           <td class="contato">Fernando<br>11962833948</td>
-          <td class="seg">Alimentos e Bebidas</td>
+          <td>Alimentos e Bebidas</td>
           <td><span class="date">21/05</span></td>
           <td><span class="date">21/05</span></td>
-          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td style="font-size:.82rem;">E-mail → WhatsApp</td>
           <td><span class="badge b-gray">Sem retorno</span></td>
           <td class="obs">Tentativa de contato · Aguardando interação</td>
         </tr>
         <tr>
           <td class="empresa">Bovmeat</td>
           <td class="contato">Liliana<br>11999486582</td>
-          <td class="seg">Carnes e Derivados</td>
+          <td>Carnes e Derivados</td>
           <td><span class="date">25/05</span></td>
           <td><span class="date">25/05</span></td>
-          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td style="font-size:.82rem;">E-mail → WhatsApp</td>
           <td><span class="badge b-amber">Bid em andamento</span></td>
-          <td class="obs">Parcial aderência · Atendimento apenas para insumos/alimento</td>
+          <td class="obs">Parcial aderência · Só insumos/alimento</td>
         </tr>
         <tr>
           <td class="empresa">Mathis</td>
           <td class="contato">Juliana<br>11992165875</td>
-          <td class="seg">Têxtil</td>
+          <td>Têxtil</td>
           <td><span class="date">25/05</span></td>
           <td><span class="date">25/05</span></td>
-          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td style="font-size:.82rem;">E-mail → WhatsApp</td>
           <td><span class="badge b-amber">Bid em andamento</span></td>
           <td class="obs">Parcial aderência · 95% FOB</td>
         </tr>
         <tr>
           <td class="empresa">ALVES RIBEIRO</td>
           <td class="contato">Jhon Wilkers<br>94981285575</td>
-          <td class="seg">Construtora</td>
+          <td>Construtora</td>
           <td><span class="date">22/05</span></td>
           <td><span class="date">25/05</span></td>
-          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td style="font-size:.82rem;">E-mail → WhatsApp</td>
           <td><span class="badge b-blue">Em sondagem</span></td>
-          <td class="obs">Obra rodoviária SP-294 · Entregas de equipamentos e peças</td>
+          <td class="obs">Obra rodoviária SP-294 · Entregas de equipamentos</td>
         </tr>
         <tr>
           <td class="empresa">BS Seg</td>
           <td class="contato">Pedro Alma<br>14991191041</td>
-          <td class="seg">Eletrônicos</td>
+          <td>Eletrônicos</td>
           <td><span class="date">21/05</span></td>
           <td><span class="date">22/05</span></td>
-          <td><span class="canal">E-mail → Ligação</span></td>
+          <td style="font-size:.82rem;">E-mail → Ligação</td>
           <td><span class="badge b-red">Sem potencial</span></td>
           <td class="obs">Cotação avulsa · 4 lojas</td>
         </tr>
         <tr>
-          <td class="empresa">Paulo Cesar Rachel Junior</td>
+          <td class="empresa">Paulo Cesar Rachel Jr.</td>
           <td class="contato">Paulo Cesar<br>12992218679</td>
-          <td class="seg">Outros</td>
+          <td>Outros</td>
           <td><span class="date">26/05</span></td>
           <td><span class="date">26/05</span></td>
-          <td><span class="canal">E-mail → WhatsApp</span></td>
+          <td style="font-size:.82rem;">E-mail → WhatsApp</td>
           <td><span class="badge b-purple">Em contato</span></td>
           <td class="obs">Apresentação inicial · Aguardando retorno</td>
         </tr>
       </tbody>
     </table>
   </div>
-</main>
 
-<footer>
-  Cardô Marketing · DFT Logística · Período: 18 a 26/05/2026
-</footer>
+</main>
+<footer>Cardô Marketing · DFT Logística · Período: 18 a 26/05/2026</footer>
+
+<script>
+(function(){
+  var SID="17CuuYKxf13NHpJHRAZPoGW9_1Ni_xnIcVTeDQHXb5yQ",GG="550644796";
+  function csvURL(gid){return"https://docs.google.com/spreadsheets/d/"+SID+"/gviz/tq?tqx=out:csv&gid="+gid;}
+  function sp(l){var p=[],c="",q=false;for(var i=0;i<l.length;i++){var ch=l[i];if(ch==='"')q=!q;else if(ch===','&&!q){p.push(c.trim().replace(/^"|"$/g,''));c='';}else c+=ch;}p.push(c.trim().replace(/^"|"$/g,''));return p;}
+  function brlP(s){return parseFloat(String(s).replace(/R\$\s*/,'').replace(/\./g,'').replace(',','.'))||0;}
+  function intP(s){return parseInt(String(s).replace(/[.,]/g,''))||0;}
+  function BRL(v){return'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function mk(lbl,val,sub,color){
+    return'<div class="dash-card"><div class="dash-lbl">'+lbl+'</div><div class="dash-val" style="color:'+(color||'#0c1d73')+'">'+val+'</div><div class="dash-sub">'+sub+'</div></div>';
+  }
+  fetch(csvURL(GG)).then(function(r){return r.text();}).then(function(txt){
+    var rows=[];
+    txt.split('\n').slice(1).forEach(function(l){
+      if(!l.trim())return;
+      var p=sp(l);if(p.length<6)return;
+      var d=p[0].split('/');if(d.length!==3)return;
+      var date=d[2]+'-'+d[1]+'-'+d[0];
+      if(date<'2026-05-18'||date>'2026-05-26')return;
+      rows.push({invest:brlP(p[2]),clk:intP(p[4]),leads:intP(p[5])});
+    });
+    var invest=rows.reduce(function(s,r){return s+r.invest;},0);
+    var clk=rows.reduce(function(s,r){return s+r.clk;},0);
+    var leads=rows.reduce(function(s,r){return s+r.leads;},0);
+    var cpl=leads>0?invest/leads:0;
+    var cpc=clk>0?invest/clk:0;
+    var rastrPct=leads>0?Math.round(leads/10*100):0;
+
+    document.getElementById('dashStrip').innerHTML=
+      mk('Investido (Google Ads)',BRL(invest),'18 a 26/05','#2621bf')+
+      mk('Cliques gerados',clk.toLocaleString('pt-BR'),'Visitantes do site','#1a73e8')+
+      mk('Leads rastreados (pixel)',leads,'Registrados pelo Google Ads',leads>0?'#34a853':'#ea4335')+
+      mk('CPL rastreado',cpl>0?BRL(cpl):'—','Custo por lead (pixel)','#7c3aed')+
+      mk('Leads reais confirmados','10','Via CRM / comercial','#f59e0b');
+
+    var alertText='<strong>Por que o Google Ads registra '+leads+' lead'+(leads!==1?'s':'')+'  e o comercial reporta 10?</strong> '
+      +'O pixel do Google Ads captura apenas conversões com cookie ativo no mesmo dispositivo e navegador. '
+      +'Limitações de iOS/Safari, ad blockers e leads que voltam dias depois sem clicar no anúncio não são atribuídos. '
+      +'O investimento de '+BRL(invest)+' contribuiu para os 10 leads — mas o CPL real, considerando todos, é de '+BRL(invest/10)+' por lead, '
+      +'enquanto o pixel indica '+BRL(cpl)+'. O canal está funcionando melhor do que os números isolados sugerem.';
+    document.getElementById('dashAlertText').innerHTML=alertText;
+    document.getElementById('dashLoading').style.display='none';
+    document.getElementById('dashData').style.display='block';
+  }).catch(function(){
+    document.getElementById('dashLoading').textContent='Não foi possível carregar dados da dashboard.';
+  });
+})();
+</script>
 </body>
 </html>
