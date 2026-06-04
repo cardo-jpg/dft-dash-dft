@@ -9,12 +9,12 @@
 :root{
   --bg:#07071a;
   --card:rgba(255,255,255,.05);
+  --card2:rgba(255,255,255,.07);
   --brd:rgba(255,255,255,.1);
   --txt:#e8eaf6;
-  --mu:rgba(255,255,255,.55);
+  --mu:rgba(255,255,255,.5);
   --accent:#4f6ef7;
   --accent2:#6b8aff;
-  --orange:#e97919;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{
@@ -29,81 +29,88 @@ body{
 }
 .gl{height:3px;background:linear-gradient(90deg,#2621bf,#4285f4,#6b8aff,#2621bf);background-size:300%;animation:gl 4s linear infinite;}
 @keyframes gl{0%{background-position:0%}100%{background-position:300%}}
+
 header{background:rgba(10,10,36,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--brd);}
-.hi{max-width:900px;margin:0 auto;padding:28px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-.brand{font-size:.8rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);}
-h1{font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;margin-top:4px;}
+.hi{max-width:960px;margin:0 auto;padding:28px 36px;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.brand{font-size:.78rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin-bottom:4px;}
+h1{font-family:'Fraunces',serif;font-size:1.7rem;color:#fff;}
 h1 em{font-style:italic;color:var(--accent2);}
-.subtitle{font-size:.9rem;color:var(--mu);margin-top:4px;}
-.badge-wrap{display:flex;gap:8px;flex-wrap:wrap;}
-.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid var(--brd);border-radius:8px;padding:6px 14px;font-size:.78rem;font-weight:700;color:var(--mu);}
+.subtitle{font-size:.88rem;color:var(--mu);margin-top:4px;}
+.badges{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding-top:6px;}
+.badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.06);border:1px solid var(--brd);border-radius:7px;padding:5px 12px;font-size:.76rem;font-weight:700;color:var(--mu);}
 
-main{max-width:900px;margin:0 auto;padding:40px 36px 80px;}
+main{max-width:960px;margin:0 auto;padding:44px 36px 80px;}
 
-/* section label */
-.sec-label{font-size:.75rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent2);display:flex;align-items:center;gap:10px;margin-bottom:18px;margin-top:50px;}
-.sec-label:first-child{margin-top:0;}
-.sec-label::after{content:'';flex:1;height:1px;background:var(--brd);}
+/* group label */
+.group-label{
+  font-size:.72rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--accent2);display:flex;align-items:center;gap:10px;
+  margin-bottom:20px;margin-top:54px;
+}
+.group-label:first-child{margin-top:0;}
+.group-label::after{content:'';flex:1;height:1px;background:var(--brd);}
+.group-label span{
+  background:rgba(107,138,255,.12);border:1px solid rgba(107,138,255,.25);
+  border-radius:6px;padding:3px 10px;font-size:.7rem;
+}
 
 /* roteiro card */
-.roteiro{background:var(--card);border:1px solid var(--brd);border-radius:18px;overflow:hidden;margin-bottom:28px;}
-.roteiro-header{padding:22px 28px;border-bottom:1px solid var(--brd);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;}
-.roteiro-num{width:40px;height:40px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:900;color:#fff;flex-shrink:0;}
-.roteiro-title-wrap{flex:1;}
-.roteiro-title{font-size:1.15rem;font-weight:900;color:#fff;line-height:1.2;}
-.roteiro-hook{font-size:.85rem;color:var(--mu);margin-top:4px;font-style:italic;}
-.roteiro-meta{display:flex;gap:8px;flex-wrap:wrap;}
-.meta-tag{font-size:.7rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:6px;border:1px solid;}
-.mt-dur{color:#6b8aff;border-color:rgba(107,138,255,.3);background:rgba(107,138,255,.08);}
-.mt-type{color:#34d399;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.08);}
-.mt-obj{color:#fbbf24;border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.08);}
+.rot{background:var(--card);border:1px solid var(--brd);border-radius:16px;margin-bottom:16px;overflow:hidden;}
+.rot-head{
+  padding:18px 24px;border-bottom:1px solid var(--brd);
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+}
+.rot-num{
+  width:34px;height:34px;border-radius:10px;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;font-weight:900;color:#fff;flex-shrink:0;
+}
+.rot-num.var{background:rgba(107,138,255,.25);color:var(--accent2);}
+.rot-title{font-size:1rem;font-weight:900;color:#fff;flex:1;}
+.rot-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.tag{font-size:.65rem;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:3px 9px;border-radius:5px;border:1px solid;}
+.t-dur{color:#6b8aff;border-color:rgba(107,138,255,.3);background:rgba(107,138,255,.08);}
+.t-type{color:#34d399;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.08);}
 
-.roteiro-body{padding:0 28px 28px;}
+.rot-body{padding:22px 24px;}
 
-/* bloco de cena */
-.bloco{margin-top:22px;}
-.bloco-label{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
-.bl-gancho .bloco-label{color:#f87171;}
-.bl-gancho .bloco-label::before{content:'';width:8px;height:8px;border-radius:50%;background:#f87171;display:inline-block;}
-.bl-dev .bloco-label{color:#60a5fa;}
-.bl-dev .bloco-label::before{content:'';width:8px;height:8px;border-radius:50%;background:#60a5fa;display:inline-block;}
-.bl-solucao .bloco-label{color:#34d399;}
-.bl-solucao .bloco-label::before{content:'';width:8px;height:8px;border-radius:50%;background:#34d399;display:inline-block;}
-.bl-cta .bloco-label{color:#fbbf24;}
-.bl-cta .bloco-label::before{content:'';width:8px;height:8px;border-radius:50%;background:#fbbf24;display:inline-block;}
+/* gancho */
+.gancho{
+  background:rgba(255,255,255,.06);border-left:3px solid var(--accent2);
+  border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:16px;
+}
+.gancho-label{font-size:.65rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent2);margin-bottom:6px;}
+.gancho-text{font-size:1.05rem;font-weight:900;color:#fff;line-height:1.5;}
 
-.fala{background:rgba(255,255,255,.04);border-left:3px solid rgba(255,255,255,.15);border-radius:0 10px 10px 0;padding:14px 18px;font-size:1rem;font-weight:700;color:#fff;line-height:1.7;}
-.fala strong{color:#6b8aff;}
+/* corpo */
+.corpo{font-size:.95rem;font-weight:600;color:#e8eaf6;line-height:1.8;margin-bottom:16px;}
+.corpo strong{color:#fff;font-weight:900;}
 
-.notas{margin-top:10px;display:flex;flex-direction:column;gap:6px;}
-.nota{display:flex;gap:8px;align-items:flex-start;font-size:.8rem;color:var(--mu);line-height:1.5;}
-.nota::before{content:'→';color:var(--accent2);font-weight:800;flex-shrink:0;margin-top:1px;}
+/* cta */
+.cta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(107,138,255,.12);border:1px solid rgba(107,138,255,.25);
+  border-radius:8px;padding:10px 16px;font-size:.85rem;font-weight:800;color:var(--accent2);
+}
+.cta::before{content:'👇';font-size:.9rem;}
 
-/* overlay strip */
-.overlay-strip{margin-top:22px;background:rgba(107,138,255,.06);border:1px solid rgba(107,138,255,.2);border-radius:12px;padding:14px 18px;}
-.overlay-title{font-size:.72rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent2);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
-.overlay-title::before{content:'🖥';}
-.overlay-list{display:flex;flex-direction:column;gap:6px;}
-.overlay-item{display:flex;gap:10px;align-items:center;font-size:.82rem;color:#e8eaf6;}
-.ov-time{font-size:.72rem;font-weight:800;color:var(--accent2);background:rgba(107,138,255,.12);border-radius:5px;padding:2px 8px;white-space:nowrap;flex-shrink:0;}
-.ov-text{font-weight:700;}
-
-/* cenario strip */
-.cenario-strip{margin-top:22px;background:rgba(255,255,255,.03);border:1px solid var(--brd);border-radius:12px;padding:14px 18px;display:flex;gap:28px;flex-wrap:wrap;}
-.cen-item{display:flex;flex-direction:column;gap:3px;}
-.cen-lbl{font-size:.68rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--mu);}
-.cen-val{font-size:.88rem;font-weight:700;color:#e8eaf6;}
+/* nota */
+.nota-box{
+  margin-top:14px;background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.15);
+  border-radius:10px;padding:12px 16px;font-size:.8rem;color:#fde68a;line-height:1.6;
+  display:flex;gap:8px;align-items:flex-start;
+}
+.nota-box::before{content:'💡';flex-shrink:0;}
 
 /* divider */
-.divider{height:1px;background:var(--brd);margin:22px 0;}
-
-/* tip box */
-.tip-box{background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.2);border-radius:12px;padding:16px 20px;margin-top:30px;display:flex;gap:12px;align-items:flex-start;}
-.tip-icon{font-size:1.1rem;flex-shrink:0;}
-.tip-text{font-size:.83rem;color:#fde68a;line-height:1.6;}
-.tip-text strong{color:#fbbf24;}
+hr{border:none;border-top:1px solid var(--brd);margin:18px 0;}
 
 footer{text-align:center;padding:32px;font-size:.82rem;color:var(--mu);}
+
+@media(max-width:600px){
+  .hi,.main{padding-left:20px;padding-right:20px;}
+  main{padding:30px 20px 60px;}
+}
 </style>
 </head>
 <body>
@@ -113,11 +120,11 @@ footer{text-align:center;padding:32px;font-size:.82rem;color:var(--mu);}
     <div>
       <div class="brand">Cardô Marketing × DFT Logística</div>
       <h1>Roteiros de <em>Vídeo</em></h1>
-      <p class="subtitle">3 roteiros prontos para gravação — formato Reels/Talking head · Junho 2026</p>
+      <p class="subtitle">3 roteiros aprovados + 6 variações — prontos para gravação · Junho 2026</p>
     </div>
-    <div class="badge-wrap">
-      <div class="badge">📹 3 vídeos</div>
-      <div class="badge">⏱ 40–55s cada</div>
+    <div class="badges">
+      <div class="badge">📹 9 roteiros</div>
+      <div class="badge">⏱ 25–40s cada</div>
       <div class="badge">🎯 Geração de leads B2B</div>
     </div>
   </div>
@@ -126,266 +133,232 @@ footer{text-align:center;padding:32px;font-size:.82rem;color:var(--mu);}
 
 <main>
 
-  <!-- ===== ROTEIRO 1 ===== -->
-  <div class="sec-label">Roteiro 01</div>
-  <div class="roteiro">
-    <div class="roteiro-header">
-      <div class="roteiro-num">1</div>
-      <div class="roteiro-title-wrap">
-        <div class="roteiro-title">A entrega atrasou — e o seu cliente já sabe</div>
-        <div class="roteiro-hook">Gancho: situação de dor que todo gestor de logística já viveu</div>
-      </div>
-      <div class="roteiro-meta">
-        <span class="meta-tag mt-dur">~45 segundos</span>
-        <span class="meta-tag mt-type">Talking head</span>
-        <span class="meta-tag mt-obj">Leads frete fracionado</span>
+  <!-- ======= GRUPO 1 ======= -->
+  <div class="group-label"><span>Tema 01</span> O mecânico próprio</div>
+
+  <!-- 1 principal -->
+  <div class="rot">
+    <div class="rot-head">
+      <div class="rot-num">1</div>
+      <div class="rot-title">Principal</div>
+      <div class="rot-tags">
+        <span class="tag t-dur">~35s</span>
+        <span class="tag t-type">Talking head</span>
       </div>
     </div>
-    <div class="roteiro-body">
-
-      <div class="bloco bl-gancho">
-        <div class="bloco-label">Gancho — 0 a 4s</div>
-        <div class="fala">Você ficou sabendo do atraso pelo seu cliente — ou antes dele?</div>
-        <div class="notas">
-          <div class="nota">Olhar direto para a câmera. Pausa de 1 segundo após a pergunta.</div>
-          <div class="nota">Tom sério, não agressivo — como se estivesse falando com um amigo gestor.</div>
-        </div>
+    <div class="rot-body">
+      <div class="gancho">
+        <div class="gancho-label">Gancho — 0 a 3s</div>
+        <div class="gancho-text">Transportadora com mecânico e oficina próprios dentro da empresa.</div>
       </div>
-
-      <div class="divider"></div>
-
-      <div class="bloco bl-dev">
-        <div class="bloco-label">Desenvolvimento — 4 a 22s</div>
-        <div class="fala">A maioria dos gestores que chega até a gente conta a mesma história.<br><br>
-A entrega atrasou. O cliente ligou primeiro. E aí virou reunião de emergência, time parou tudo, e você passou a tarde apagando incêndio.<br><br>
-O problema não foi a falta de esforço. Foi <strong>falta de comunicação entre você e a transportadora.</strong></div>
-        <div class="notas">
-          <div class="nota">Falar de forma pausada. Não correr.</div>
-          <div class="nota">"Reunião de emergência" pode ganhar uma expressão no rosto — leve — para criar identificação.</div>
-        </div>
+      <div class="corpo">
+        Parece detalhe. Não é.<br><br>
+        Quando um caminhão quebra na estrada, a maioria das transportadoras liga pra oficina terceirizada. Espera orçamento. Aprova. Espera o conserto.<br><br>
+        A DFT não. A gente resolve na hora — porque a carga não pode esperar.<br><br>
+        Frota própria, rastreamento em tempo real, câmeras com inteligência artificial em cada veículo.
       </div>
-
-      <div class="divider"></div>
-
-      <div class="bloco bl-solucao">
-        <div class="bloco-label">Solução — 22 a 38s</div>
-        <div class="fala">A DFT trabalha diferente.<br><br>
-Quando tem imprevisto, <strong>você sabe antes do seu cliente.</strong><br>
-Tem ponto de contato fixo, comunicação ativa e SLA definido em contrato.<br><br>
-Seu cliente recebe uma solução — não uma surpresa.</div>
-        <div class="notas">
-          <div class="nota">Falar "você sabe antes do seu cliente" com confiança — essa é a promessa central.</div>
-          <div class="nota">Dar uma leve pausa antes de "seu cliente recebe uma solução".</div>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="bloco bl-cta">
-        <div class="bloco-label">CTA — 38 a 45s</div>
-        <div class="fala">Se você opera frete fracionado em SP e quer uma transportadora que trabalha <strong>com</strong> você — não só <strong>para</strong> você — clica no link aqui e pede uma cotação.</div>
-        <div class="notas">
-          <div class="nota">Apontar para baixo ao falar "link aqui" — gesto natural.</div>
-          <div class="nota">Tom mais leve, quase um convite.</div>
-        </div>
-      </div>
-
-      <div class="overlay-strip">
-        <div class="overlay-title">Textos na tela (overlay)</div>
-        <div class="overlay-list">
-          <div class="overlay-item"><span class="ov-time">0s</span><span class="ov-text">Você ficou sabendo do atraso pelo seu cliente?</span></div>
-          <div class="overlay-item"><span class="ov-time">22s</span><span class="ov-text">DFT Logística — Frete Fracionado B2B · SP</span></div>
-          <div class="overlay-item"><span class="ov-time">28s</span><span class="ov-text">✅ Ponto de contato fixo · SLA em contrato · Comunicação ativa</span></div>
-          <div class="overlay-item"><span class="ov-time">38s</span><span class="ov-text">👇 Solicite uma cotação — link na bio</span></div>
-        </div>
-      </div>
-
-      <div class="cenario-strip">
-        <div class="cen-item"><div class="cen-lbl">Cenário de gravação</div><div class="cen-val">Escritório ou operação ao fundo</div></div>
-        <div class="cen-item"><div class="cen-lbl">Posição</div><div class="cen-val">Meio da tela, centralized</div></div>
-        <div class="cen-item"><div class="cen-lbl">Roupa</div><div class="cen-val">Camisa DFT ou social</div></div>
-        <div class="cen-item"><div class="cen-lbl">Corte</div><div class="cen-val">Sem cortes — uma tomada única</div></div>
-      </div>
-
+      <div class="cta">Chama a DFT — link aqui embaixo</div>
+      <div class="nota-box">Pausa depois de "Parece detalhe." — deixa a frase cair antes de continuar.</div>
     </div>
   </div>
 
-  <!-- ===== ROTEIRO 2 ===== -->
-  <div class="sec-label">Roteiro 02</div>
-  <div class="roteiro">
-    <div class="roteiro-header">
-      <div class="roteiro-num">2</div>
-      <div class="roteiro-title-wrap">
-        <div class="roteiro-title">O critério que ninguém te fala na hora de escolher uma transportadora</div>
-        <div class="roteiro-hook">Gancho: educação + posicionamento de autoridade</div>
-      </div>
-      <div class="roteiro-meta">
-        <span class="meta-tag mt-dur">~50 segundos</span>
-        <span class="meta-tag mt-type">Talking head</span>
-        <span class="meta-tag mt-obj">Autoridade + leads</span>
+  <!-- 1A -->
+  <div class="rot">
+    <div class="rot-head">
+      <div class="rot-num var">1A</div>
+      <div class="rot-title">Variação A — Foco no risco</div>
+      <div class="rot-tags">
+        <span class="tag t-dur">~30s</span>
+        <span class="tag t-type">Talking head</span>
       </div>
     </div>
-    <div class="roteiro-body">
-
-      <div class="bloco bl-gancho">
-        <div class="bloco-label">Gancho — 0 a 4s</div>
-        <div class="fala">Qual é o critério número um para escolher uma transportadora? Não é o preço.</div>
-        <div class="notas">
-          <div class="nota">Começar já respondendo — não perguntar e esperar. O ritmo precisa ser rápido.</div>
-          <div class="nota">Levantar levemente o dedo indicador ao dizer "número um".</div>
-        </div>
+    <div class="rot-body">
+      <div class="gancho">
+        <div class="gancho-label">Gancho — 0 a 3s</div>
+        <div class="gancho-text">Transportadora sem mecânico próprio é um risco que você não vê.</div>
       </div>
-
-      <div class="divider"></div>
-
-      <div class="bloco bl-dev">
-        <div class="bloco-label">Desenvolvimento — 4 a 26s</div>
-        <div class="fala">Todo mundo foca em valor de frete. É errado.<br><br>
-O critério que define se uma transportadora é boa de verdade é simples: <strong>quando der errado, essa empresa resolve — ou some?</strong><br><br>
-Imprevisto acontece em toda operação. Câmbio de rota, veículo com problema, greve, trânsito — faz parte.<br><br>
-O que diferencia uma transportadora séria é o que ela faz nos próximos <strong>30 minutos depois que o imprevisto acontece.</strong></div>
-        <div class="notas">
-          <div class="nota">Pausar após "resolve — ou some?" para deixar a pergunta respirar.</div>
-          <div class="nota">"30 minutos" com ênfase clara — é o dado âncora do vídeo.</div>
-        </div>
+      <div class="corpo">
+        Quando o caminhão para na estrada, a maioria liga pra oficina terceirizada. Espera orçamento. Aprova. Espera o conserto.<br><br>
+        A DFT tem mecânico e oficina dentro da empresa. A operação não para — e a sua carga chega.
       </div>
-
-      <div class="divider"></div>
-
-      <div class="bloco bl-solucao">
-        <div class="bloco-label">Solução — 26 a 42s</div>
-        <div class="fala">Na DFT, a gente tem protocolo claro pra isso.<br><br>
-Você tem <strong>um contato direto</strong>, sabe o status em tempo real e se precisar reagendar, a gente já tá na frente antes de você precisar pedir.<br><br>
-Não é promessa de marketing. É o modelo de operação.</div>
-        <div class="notas">
-          <div class="nota">"Não é promessa de marketing" — falar com firmeza, quase como um desafio.</div>
-          <div class="nota">Tom de quem fala de dentro da operação — autoridade genuína.</div>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="bloco bl-cta">
-        <div class="bloco-label">CTA — 42 a 50s</div>
-        <div class="fala">Frete fracionado B2B em SP, com quem <strong>assume junto com você.</strong><br>
-Solicita uma cotação — link aqui embaixo.</div>
-        <div class="notas">
-          <div class="nota">Falar "assume junto com você" com leveza — não empurrar.</div>
-        </div>
-      </div>
-
-      <div class="overlay-strip">
-        <div class="overlay-title">Textos na tela (overlay)</div>
-        <div class="overlay-list">
-          <div class="overlay-item"><span class="ov-time">0s</span><span class="ov-text">O critério que ninguém te fala ao escolher uma transportadora</span></div>
-          <div class="overlay-item"><span class="ov-time">14s</span><span class="ov-text">Quando der errado — ela resolve ou some?</span></div>
-          <div class="overlay-item"><span class="ov-time">26s</span><span class="ov-text">DFT Logística · Protocolo de imprevistos</span></div>
-          <div class="overlay-item"><span class="ov-time">42s</span><span class="ov-text">👇 Solicite uma cotação — link na bio</span></div>
-        </div>
-      </div>
-
-      <div class="cenario-strip">
-        <div class="cen-item"><div class="cen-lbl">Cenário de gravação</div><div class="cen-val">Escritório ou galpão ao fundo desfocado</div></div>
-        <div class="cen-item"><div class="cen-lbl">Posição</div><div class="cen-val">Levemente à esquerda — texto à direita</div></div>
-        <div class="cen-item"><div class="cen-lbl">Corte</div><div class="cen-val">1 a 2 cortes máximo</div></div>
-        <div class="cen-item"><div class="cen-lbl">Tom</div><div class="cen-val">Educativo, confiante</div></div>
-      </div>
-
+      <div class="cta">Chama a DFT — link aqui embaixo</div>
     </div>
   </div>
 
-  <!-- ===== ROTEIRO 3 ===== -->
-  <div class="sec-label">Roteiro 03</div>
-  <div class="roteiro">
-    <div class="roteiro-header">
-      <div class="roteiro-num">3</div>
-      <div class="roteiro-title-wrap">
-        <div class="roteiro-title">O contrato que não renovou — e o que aprendi com isso</div>
-        <div class="roteiro-hook">Gancho: storytelling curto de perda de cliente por falha logística</div>
-      </div>
-      <div class="roteiro-meta">
-        <span class="meta-tag mt-dur">~55 segundos</span>
-        <span class="meta-tag mt-type">Storytelling</span>
-        <span class="meta-tag mt-obj">Conexão + leads</span>
+  <!-- 1B -->
+  <div class="rot">
+    <div class="rot-head">
+      <div class="rot-num var">1B</div>
+      <div class="rot-title">Variação B — Foco em equipe própria</div>
+      <div class="rot-tags">
+        <span class="tag t-dur">~35s</span>
+        <span class="tag t-type">Talking head</span>
       </div>
     </div>
-    <div class="roteiro-body">
-
-      <div class="bloco bl-gancho">
-        <div class="bloco-label">Gancho — 0 a 5s</div>
-        <div class="fala">Um cliente não renovou o contrato. Não por preço. Por comunicação.</div>
-        <div class="notas">
-          <div class="nota">Começar pausado — uma frase por vez. Deixar cada uma cair.</div>
-          <div class="nota">Olhar fixo para a câmera. Sem sorrir no começo.</div>
-        </div>
+    <div class="rot-body">
+      <div class="gancho">
+        <div class="gancho-label">Gancho — 0 a 3s</div>
+        <div class="gancho-text">Transporte com frota própria, mecânico próprio e rastreamento em tempo real.</div>
       </div>
-
-      <div class="divider"></div>
-
-      <div class="bloco bl-dev">
-        <div class="bloco-label">Desenvolvimento — 5 a 28s</div>
-        <div class="fala">Tinha tudo certo no papel: prazo bom, preço competitivo, operação rodando.<br><br>
-Mas quando um imprevisto aconteceu — e sempre acontece — o cliente ficou sem informação.<br>
-Ligou pra transportadora. Ninguém atendeu.<br>
-Ligou pro fornecedor. O fornecedor ligou pra gente.<br><br>
-E aí o estrago estava feito. Não foi a entrega que atrasou que custou o contrato.<br>
-<strong>Foi o silêncio.</strong></div>
-        <div class="notas">
-          <div class="nota">"Foi o silêncio." — pausa antes, falar devagar. É o pico emocional do vídeo.</div>
-          <div class="nota">A sequência de "ligou pra… ligou pra… ligou pra…" deve ter ritmo acelerado — como se fosse caótico mesmo.</div>
-        </div>
+      <div class="corpo">
+        A maioria das transportadoras terceiriza tudo. Motorista, manutenção, suporte.<br><br>
+        A DFT não. Equipe 100% própria, câmeras com IA em cada veículo e oficina dentro da empresa.<br><br>
+        Porque quando algo dá errado na estrada, você não pode depender de terceiro pra resolver.
       </div>
-
-      <div class="divider"></div>
-
-      <div class="bloco bl-solucao">
-        <div class="bloco-label">Solução — 28 a 44s</div>
-        <div class="fala">Foi por isso que a DFT construiu um modelo diferente.<br><br>
-Cada cliente tem um ponto de contato fixo.<br>
-Quando tem imprevisto, <strong>você é avisado antes do seu cliente.</strong><br>
-E a gente não desaparece quando o problema aparece.</div>
-        <div class="notas">
-          <div class="nota">Tom muda aqui — de reflexivo para confiante. Virada clara.</div>
-          <div class="nota">Listar os três pontos com ritmo firme — quase como uma promessa.</div>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="bloco bl-cta">
-        <div class="bloco-label">CTA — 44 a 55s</div>
-        <div class="fala">Se você opera frete fracionado em SP e já perdeu cliente por falha de comunicação — ou não quer perder —<br>
-fala com a DFT. A gente sabe o que custa o silêncio.<br><br>
-<strong>Link na bio.</strong></div>
-        <div class="notas">
-          <div class="nota">"A gente sabe o que custa o silêncio" — eco do gancho. Tom de virada positiva.</div>
-          <div class="nota">"Link na bio" seco, direto — sem enfeitar.</div>
-        </div>
-      </div>
-
-      <div class="overlay-strip">
-        <div class="overlay-title">Textos na tela (overlay)</div>
-        <div class="overlay-list">
-          <div class="overlay-item"><span class="ov-time">0s</span><span class="ov-text">Um cliente não renovou. Não por preço. Por comunicação.</span></div>
-          <div class="overlay-item"><span class="ov-time">22s</span><span class="ov-text">Foi o silêncio.</span></div>
-          <div class="overlay-item"><span class="ov-time">28s</span><span class="ov-text">DFT Logística — modelo de comunicação ativa</span></div>
-          <div class="overlay-item"><span class="ov-time">44s</span><span class="ov-text">👇 Solicite uma cotação — link na bio</span></div>
-        </div>
-      </div>
-
-      <div class="cenario-strip">
-        <div class="cen-item"><div class="cen-lbl">Cenário de gravação</div><div class="cen-val">Escritório — tom mais íntimo</div></div>
-        <div class="cen-item"><div class="cen-lbl">Posição</div><div class="cen-val">Centralizado, leve close</div></div>
-        <div class="cen-item"><div class="cen-lbl">Corte</div><div class="cen-val">Sem cortes — fluidez do storytelling</div></div>
-        <div class="cen-item"><div class="cen-lbl">Tom</div><div class="cen-val">Reflexivo → confiante</div></div>
-      </div>
-
+      <div class="cta">Link na bio</div>
     </div>
   </div>
 
-  <div class="tip-box">
-    <div class="tip-icon">💡</div>
-    <div class="tip-text"><strong>Dica de gravação:</strong> grave cada roteiro em 3 tomadas. Na primeira, leia. Na segunda, fale de memória mas com o roteiro do lado. Na terceira, jogue fora o roteiro e fale como se estivesse explicando pra um colega. A terceira costuma ser a melhor.</div>
+
+  <!-- ======= GRUPO 2 ======= -->
+  <div class="group-label"><span>Tema 02</span> Você foi o último a saber</div>
+
+  <!-- 2 principal -->
+  <div class="rot">
+    <div class="rot-head">
+      <div class="rot-num">2</div>
+      <div class="rot-title">Principal</div>
+      <div class="rot-tags">
+        <span class="tag t-dur">~35s</span>
+        <span class="tag t-type">Talking head</span>
+      </div>
+    </div>
+    <div class="rot-body">
+      <div class="gancho">
+        <div class="gancho-label">Gancho — 0 a 3s</div>
+        <div class="gancho-text">Transporte atrasou e o seu cliente ficou sabendo antes de você.</div>
+      </div>
+      <div class="corpo">
+        Todo gestor de logística conhece esse momento. E sabe o que vem depois — o time para tudo, vira reunião de emergência, e você passa o dia apagando incêndio.<br><br>
+        O problema não é o atraso. É que a sua transportadora não te avisou.<br><br>
+        Na DFT, você sabe antes do seu cliente. Rastreamento em tempo real, câmeras com IA em cada caminhão e um ponto de contato fixo que atende quando precisa.
+      </div>
+      <div class="cta">Chama a DFT — link aqui embaixo</div>
+      <div class="nota-box">"O problema não é o atraso." — pausa antes. É a virada do vídeo.</div>
+    </div>
+  </div>
+
+  <!-- 2A -->
+  <div class="rot">
+    <div class="rot-head">
+      <div class="rot-num var">2A</div>
+      <div class="rot-title">Variação A — Foco em visibilidade</div>
+      <div class="rot-tags">
+        <span class="tag t-dur">~30s</span>
+        <span class="tag t-type">Talking head</span>
+      </div>
+    </div>
+    <div class="rot-body">
+      <div class="gancho">
+        <div class="gancho-label">Gancho — 0 a 3s</div>
+        <div class="gancho-text">Transporte atrasou. Você foi o último a saber.</div>
+      </div>
+      <div class="corpo">
+        É o pior cenário do gestor de logística — e quase sempre a culpa é da comunicação, não do trânsito.<br><br>
+        Na DFT, você tem rastreamento em tempo real, câmeras com IA em cada caminhão e um contato fixo que atende quando você precisa.<br><br>
+        <strong>Você sabe antes do seu cliente. Sempre.</strong>
+      </div>
+      <div class="cta">Chama a DFT — link aqui embaixo</div>
+    </div>
+  </div>
+
+  <!-- 2B -->
+  <div class="rot">
+    <div class="rot-head">
+      <div class="rot-num var">2B</div>
+      <div class="rot-title">Variação B — Foco em comunicação</div>
+      <div class="rot-tags">
+        <span class="tag t-dur">~30s</span>
+        <span class="tag t-type">Talking head</span>
+      </div>
+    </div>
+    <div class="rot-body">
+      <div class="gancho">
+        <div class="gancho-label">Gancho — 0 a 3s</div>
+        <div class="gancho-text">Logística é sobre comunicação. Não só sobre caminhão.</div>
+      </div>
+      <div class="corpo">
+        O problema quase nunca é o atraso em si. É que você fica sabendo pelo cliente — não pela transportadora.<br><br>
+        Na DFT, você tem visibilidade total da carga em tempo real e um ponto de contato que não some quando o problema aparece.
+      </div>
+      <div class="cta">Chama a gente — link na bio</div>
+    </div>
+  </div>
+
+
+  <!-- ======= GRUPO 3 ======= -->
+  <div class="group-label"><span>Tema 03</span> O custo que aparece depois</div>
+
+  <!-- 3 principal -->
+  <div class="rot">
+    <div class="rot-head">
+      <div class="rot-num">3</div>
+      <div class="rot-title">Principal</div>
+      <div class="rot-tags">
+        <span class="tag t-dur">~35s</span>
+        <span class="tag t-type">Talking head</span>
+      </div>
+    </div>
+    <div class="rot-body">
+      <div class="gancho">
+        <div class="gancho-label">Gancho — 0 a 3s</div>
+        <div class="gancho-text">Logística ruim não cobra na semana. Cobra meses depois.</div>
+      </div>
+      <div class="corpo">
+        Quando o contrato não renova. Quando o cliente para de responder. Quando a sua operação começa a ser vista como risco — e não como solução.<br><br>
+        A DFT constrói o modelo onde transportadora e operação falam a mesma língua. Quando imprevistos acontecem, o seu cliente recebe uma solução — não uma desculpa.
+      </div>
+      <div class="cta">Chama a DFT — link na bio</div>
+      <div class="nota-box">Falar devagar a lista "quando o contrato não renova... quando o cliente para de responder..." — deixar cada consequência bater.</div>
+    </div>
+  </div>
+
+  <!-- 3A -->
+  <div class="rot">
+    <div class="rot-head">
+      <div class="rot-num var">3A</div>
+      <div class="rot-title">Variação A — Foco no custo invisível</div>
+      <div class="rot-tags">
+        <span class="tag t-dur">~30s</span>
+        <span class="tag t-type">Talking head</span>
+      </div>
+    </div>
+    <div class="rot-body">
+      <div class="gancho">
+        <div class="gancho-label">Gancho — 0 a 3s</div>
+        <div class="gancho-text">Logística ruim tem um custo que não aparece no boleto.</div>
+      </div>
+      <div class="corpo">
+        Aparece meses depois. Quando o cliente para de renovar. Quando a sua operação vira sinônimo de risco.<br><br>
+        Uma transportadora séria não elimina imprevistos. Mas garante que você saiba, comunique e resolva antes do seu cliente perceber.<br><br>
+        É isso que a DFT faz na prática.
+      </div>
+      <div class="cta">Link aqui embaixo</div>
+    </div>
+  </div>
+
+  <!-- 3B -->
+  <div class="rot">
+    <div class="rot-head">
+      <div class="rot-num var">3B</div>
+      <div class="rot-title">Variação B — Foco em silêncio vs solução</div>
+      <div class="rot-tags">
+        <span class="tag t-dur">~30s</span>
+        <span class="tag t-type">Talking head</span>
+      </div>
+    </div>
+    <div class="rot-body">
+      <div class="gancho">
+        <div class="gancho-label">Gancho — 0 a 3s</div>
+        <div class="gancho-text">Transporte que não comunica é mais caro do que transporte que atrasa.</div>
+      </div>
+      <div class="corpo">
+        Atraso tem solução. Falta de informação vira crise.<br><br>
+        A DFT trabalha com rastreamento ativo, equipe própria e comunicação direta — pra que quando imprevistos acontecerem, o seu cliente receba uma solução. Não uma desculpa.
+      </div>
+      <div class="cta">Chama a DFT — link na bio</div>
+      <div class="nota-box">"Atraso tem solução. Falta de informação vira crise." — falar como duas frases separadas, com pausa entre elas.</div>
+    </div>
   </div>
 
 </main>
