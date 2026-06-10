@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Pauta — DFT Logística · 10/06/2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fraunces:wght@500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#07071a;
+  --card:rgba(255,255,255,.05);
+  --card2:rgba(255,255,255,.08);
+  --brd:rgba(255,255,255,.1);
+  --txt:#e8eaf6;
+  --mu:rgba(255,255,255,.55);
+  --accent:#4f6ef7;
+  --accent2:#6b8aff;
+  --green:#34d399;
+  --amber:#fbbf24;
+  --red:#f87171;
+  --orange:#fb923c;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--txt);
+  min-height:100vh;
+  background:
+    radial-gradient(1100px 700px at -5% -15%, rgba(25,25,120,.45) 0%, transparent 60%),
+    radial-gradient(800px 600px at 105% 105%, rgba(38,33,191,.18) 0%, transparent 60%),
+    var(--bg);
+}
+.gl{height:3px;background:linear-gradient(90deg,#2621bf,#4285f4,#6b8aff,#2621bf);background-size:300%;animation:gl 4s linear infinite;}
+@keyframes gl{0%{background-position:0%}100%{background-position:300%}}
+
+header{background:rgba(10,10,36,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--brd);}
+.hi{max-width:1100px;margin:0 auto;padding:24px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.brand{font-size:.78rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin-bottom:4px;}
+h1{font-family:'Fraunces',serif;font-size:1.6rem;color:#fff;}
+h1 em{font-style:italic;color:var(--accent2);}
+.subtitle{font-size:.85rem;color:var(--mu);margin-top:3px;}
+.date-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid var(--brd);border-radius:8px;padding:8px 16px;font-size:.85rem;font-weight:800;color:#fff;}
+
+main{max-width:1100px;margin:0 auto;padding:40px 36px 80px;}
+
+.sec{font-size:.72rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent2);display:flex;align-items:center;gap:10px;margin-bottom:20px;margin-top:48px;}
+.sec:first-child{margin-top:0;}
+.sec::after{content:'';flex:1;height:1px;background:var(--brd);}
+.sec span{background:rgba(107,138,255,.12);border:1px solid rgba(107,138,255,.25);border-radius:6px;padding:2px 10px;}
+
+/* métricas */
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:8px;}
+.m-card{background:var(--card2);border:1px solid var(--brd);border-radius:14px;padding:18px 16px;text-align:center;position:relative;overflow:hidden;}
+.m-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.m-card.c-blue::before{background:var(--accent);}
+.m-card.c-green::before{background:var(--green);}
+.m-card.c-amber::before{background:var(--amber);}
+.m-card.c-red::before{background:var(--red);}
+.m-card.c-orange::before{background:var(--orange);}
+.m-lbl{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--mu);margin-bottom:6px;}
+.m-val{font-size:1.6rem;font-weight:900;color:#fff;line-height:1;}
+.m-sub{font-size:.72rem;color:var(--mu);margin-top:5px;}
+
+/* canal split */
+.canal-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;}
+.canal-card{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:16px 20px;}
+.canal-head{font-size:.75rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--mu);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.canal-head::before{content:'';width:8px;height:8px;border-radius:50%;}
+.cg::before{background:#4285f4;}
+.cm::before{background:#0866ff;}
+.canal-metrics{display:flex;gap:20px;flex-wrap:wrap;}
+.cm-item{display:flex;flex-direction:column;gap:2px;}
+.cm-lbl{font-size:.65rem;font-weight:700;text-transform:uppercase;color:var(--mu);letter-spacing:.8px;}
+.cm-val{font-size:1.05rem;font-weight:900;color:#fff;}
+
+/* leads table */
+.tbl-wrap{background:var(--card);border:1px solid var(--brd);border-radius:14px;overflow:hidden;margin-bottom:8px;}
+table{width:100%;border-collapse:collapse;}
+thead tr{background:rgba(15,15,50,.8);}
+thead th{padding:13px 14px;text-align:left;font-size:.75rem;font-weight:800;color:rgba(255,255,255,.65);letter-spacing:.5px;white-space:nowrap;border-bottom:1px solid var(--brd);}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.06);transition:background .15s;}
+tbody tr:last-child{border-bottom:none;}
+tbody tr:hover{background:rgba(255,255,255,.04);}
+tbody td{padding:12px 14px;font-size:.85rem;color:#cbd5e0;vertical-align:middle;line-height:1.4;}
+td.emp{font-weight:800;font-size:.9rem;color:#e8eaf6;}
+td.seg{font-size:.78rem;color:var(--mu);}
+td.obs{font-size:.78rem;color:var(--mu);}
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:.7rem;font-weight:800;white-space:nowrap;}
+.b-green{background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.3);}
+.b-amber{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.3);}
+.b-red{background:rgba(248,113,113,.12);color:#f87171;border:1px solid rgba(248,113,113,.25);}
+.b-blue{background:rgba(107,138,255,.15);color:#818cf8;border:1px solid rgba(107,138,255,.3);}
+.b-gray{background:rgba(148,163,184,.1);color:#94a3b8;border:1px solid rgba(148,163,184,.2);}
+.b-purple{background:rgba(192,132,252,.12);color:#c084fc;border:1px solid rgba(192,132,252,.25);}
+.dt{font-size:.75rem;color:var(--mu);font-weight:700;}
+.canal-tag{font-size:.68rem;font-weight:700;background:rgba(255,255,255,.07);border-radius:5px;padding:2px 7px;color:var(--mu);}
+
+/* alerta */
+.alert{background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.25);border-radius:12px;padding:16px 20px;display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;}
+.alert-icon{font-size:1.1rem;flex-shrink:0;}
+.alert-txt{font-size:.85rem;color:#fca5a5;line-height:1.6;}
+.alert-txt strong{color:#f87171;}
+
+/* próximos passos */
+.steps{display:flex;flex-direction:column;gap:14px;}
+.step{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--brd);border-radius:14px;padding:18px 20px;}
+.step-num{width:32px;height:32px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:900;color:#fff;flex-shrink:0;}
+.step-num.sn-amber{background:rgba(251,191,36,.2);color:#fbbf24;border:1px solid rgba(251,191,36,.3);}
+.step-num.sn-green{background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.3);}
+.step-num.sn-red{background:rgba(248,113,113,.12);color:#f87171;border:1px solid rgba(248,113,113,.25);}
+.step-body{}
+.step-title{font-size:.95rem;font-weight:900;color:#fff;margin-bottom:4px;}
+.step-desc{font-size:.83rem;color:rgba(255,255,255,.7);line-height:1.6;}
+.step-desc strong{color:#fff;}
+
+/* lp highlight */
+.lp-box{background:linear-gradient(135deg,rgba(107,138,255,.1),rgba(79,110,247,.06));border:1px solid rgba(107,138,255,.3);border-radius:14px;padding:20px 24px;margin-bottom:12px;display:flex;gap:16px;align-items:flex-start;}
+.lp-icon{font-size:1.8rem;flex-shrink:0;}
+.lp-badge{font-size:.62rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent2);margin-bottom:4px;}
+.lp-title{font-size:1rem;font-weight:900;color:#fff;margin-bottom:6px;}
+.lp-desc{font-size:.83rem;color:rgba(255,255,255,.7);line-height:1.6;}
+.lp-link{display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:rgba(107,138,255,.15);border:1px solid rgba(107,138,255,.3);border-radius:7px;padding:6px 14px;font-size:.78rem;font-weight:800;color:var(--accent2);text-decoration:none;}
+
+footer{text-align:center;padding:32px;font-size:.8rem;color:var(--mu);}
+</style>
+</head>
+<body>
+<div class="gl"></div>
+<header>
+  <div class="hi">
+    <div>
+      <div class="brand">Cardô Marketing × DFT Logística</div>
+      <h1>Pauta de <em>Reunião</em></h1>
+      <p class="subtitle">Performance, leads e próximos passos</p>
+    </div>
+    <div class="date-badge">📅 10 de Junho de 2026</div>
+  </div>
+</header>
+<div class="gl"></div>
+
+<main>
+
+  <!-- RESUMO -->
+  <div class="sec"><span>01</span> Resumo do período — 26/05 a 08/06</div>
+  <div class="metrics">
+    <div class="m-card c-blue">
+      <div class="m-lbl">Total investido</div>
+      <div class="m-val">R$1.384</div>
+      <div class="m-sub">Google + Meta</div>
+    </div>
+    <div class="m-card c-green">
+      <div class="m-lbl">Leads reais</div>
+      <div class="m-val">7</div>
+      <div class="m-sub">Via CRM / comercial</div>
+    </div>
+    <div class="m-card c-amber">
+      <div class="m-lbl">CPL real</div>
+      <div class="m-val">R$197</div>
+      <div class="m-sub">Investido ÷ 7 leads</div>
+    </div>
+    <div class="m-card c-blue">
+      <div class="m-lbl">Cliques totais</div>
+      <div class="m-val">1.670</div>
+      <div class="m-sub">Google 424 · Meta 1.246</div>
+    </div>
+    <div class="m-card c-orange">
+      <div class="m-lbl">Leads pixel</div>
+      <div class="m-val">10</div>
+      <div class="m-sub">Rastreados Google Ads</div>
+    </div>
+  </div>
+
+  <div class="canal-row">
+    <div class="canal-card">
+      <div class="canal-head cg">Google Ads</div>
+      <div class="canal-metrics">
+        <div class="cm-item"><div class="cm-lbl">Investido</div><div class="cm-val">R$975,34</div></div>
+        <div class="cm-item"><div class="cm-lbl">Cliques</div><div class="cm-val">424</div></div>
+        <div class="cm-item"><div class="cm-lbl">Leads pixel</div><div class="cm-val">10</div></div>
+        <div class="cm-item"><div class="cm-lbl">CPC médio</div><div class="cm-val">R$2,30</div></div>
+      </div>
+    </div>
+    <div class="canal-card">
+      <div class="canal-head cm">Meta Ads</div>
+      <div class="canal-metrics">
+        <div class="cm-item"><div class="cm-lbl">Investido</div><div class="cm-val">R$409,47</div></div>
+        <div class="cm-item"><div class="cm-lbl">Cliques</div><div class="cm-val">1.246</div></div>
+        <div class="cm-item"><div class="cm-lbl">CPC médio</div><div class="cm-val">R$0,33</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEADS -->
+  <div class="sec"><span>02</span> Leads recebidos — 26/05 a 08/06</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Empresa</th>
+          <th>Segmento</th>
+          <th>Entrada</th>
+          <th>Origem</th>
+          <th>Canal</th>
+          <th>Status</th>
+          <th>Observações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="emp">Paulo Cesar Rachel Junior</td>
+          <td class="seg">Outros</td>
+          <td><span class="dt">26/05</span></td>
+          <td><span class="canal-tag">E-mail</span></td>
+          <td><span class="canal-tag">WhatsApp</span></td>
+          <td><span class="badge b-gray">Aguardando retorno</span></td>
+          <td class="obs">Apresentação inicial</td>
+        </tr>
+        <tr>
+          <td class="emp">UNIQ Alimentos</td>
+          <td class="seg">Alimentos</td>
+          <td><span class="dt">Maio</span></td>
+          <td><span class="canal-tag">—</span></td>
+          <td><span class="canal-tag">—</span></td>
+          <td><span class="badge b-gray">Em avaliação</span></td>
+          <td class="obs">—</td>
+        </tr>
+        <tr>
+          <td class="emp">LN Logística</td>
+          <td class="seg">Logística</td>
+          <td><span class="dt">30/05</span></td>
+          <td><span class="canal-tag">LP</span></td>
+          <td><span class="canal-tag">E-mail</span></td>
+          <td><span class="badge b-red">Sem qualificação</span></td>
+          <td class="obs">Transportador preencheu dados para ofertar serviço — não é cliente</td>
+        </tr>
+        <tr>
+          <td class="emp">Comercial Vem q tem</td>
+          <td class="seg">Alimentos</td>
+          <td><span class="dt">07/06</span></td>
+          <td><span class="canal-tag">LP</span></td>
+          <td><span class="canal-tag">E-mail</span></td>
+          <td><span class="badge b-amber">Em andamento</span></td>
+          <td class="obs">Tentativa de contato via WhatsApp — sem retorno ainda</td>
+        </tr>
+        <tr>
+          <td class="emp">ASPMAQ Fabricação de Máquinas</td>
+          <td class="seg">Automação Industrial</td>
+          <td><span class="dt">Jun</span></td>
+          <td><span class="canal-tag">Site</span></td>
+          <td><span class="canal-tag">WhatsApp</span></td>
+          <td><span class="badge b-green">Orçamento enviado</span></td>
+          <td class="obs">Cliente potencial — em contato ativo, orçamento já enviado</td>
+        </tr>
+        <tr>
+          <td class="emp">JM Acessórios</td>
+          <td class="seg">Vestuário</td>
+          <td><span class="dt">01/06</span></td>
+          <td><span class="canal-tag">LP</span></td>
+          <td><span class="canal-tag">E-mail</span></td>
+          <td><span class="badge b-amber">Em andamento</span></td>
+          <td class="obs">Tentativa de contato via WhatsApp — sem retorno ainda</td>
+        </tr>
+        <tr>
+          <td class="emp">Editora Pipoca</td>
+          <td class="seg">Indústria Editorial</td>
+          <td><span class="dt">08/06</span></td>
+          <td><span class="canal-tag">Instagram</span></td>
+          <td><span class="canal-tag">E-mail</span></td>
+          <td><span class="badge b-blue">Reunião realizada</span></td>
+          <td class="obs">Reunião feita, tabela de valores enviada — aguardando retorno</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PERFORMANCE -->
+  <div class="sec"><span>03</span> Performance das campanhas</div>
+
+  <div class="alert">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-txt">
+      <strong>Queda de performance identificada na última semana.</strong> Após análise das campanhas, observamos redução no volume de leads e aumento do CPL em relação às semanas anteriores. O investimento está sendo consumido, mas a conversão diminuiu — isso exige ajuste de estratégia.
+    </div>
+  </div>
+
+  <!-- LP DESTAQUE -->
+  <div class="sec"><span>04</span> O que fizemos</div>
+
+  <div class="lp-box">
+    <div class="lp-icon">🚀</div>
+    <div>
+      <div class="lp-badge">Plus — sem custo adicional</div>
+      <div class="lp-title">Landing Page construída do zero para a DFT</div>
+      <div class="lp-desc">
+        Identificamos que a queda de performance estava relacionada à página de destino dos anúncios. Como ação proativa — e sem custo adicional para o cliente — desenvolvemos uma <strong>Landing Page completa e exclusiva</strong> para a DFT, construída ao longo das últimas semanas com base nos ajustes e feedbacks passados em reunião.<br><br>
+        O objetivo é converter melhor o tráfego que já existe: mais foco, menos distração, formulário direto. Isso deve reduzir o CPL e aumentar o volume de leads qualificados sem precisar aumentar o investimento.
+      </div>
+      <a class="lp-link" href="https://cardo-jpg.github.io/dft-lp/v2" target="_blank">🔗 Ver Landing Page</a>
+    </div>
+  </div>
+
+  <!-- PRÓXIMOS PASSOS -->
+  <div class="sec"><span>05</span> Próximos passos</div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Ativar a LP nos anúncios do Google</div>
+        <div class="step-desc">Substituir o site institucional pela nova Landing Page como destino dos anúncios de Search. A LP é mais direta e focada em conversão — espera-se redução do CPL nas próximas semanas.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num sn-amber">2</div>
+      <div class="step-body">
+        <div class="step-title">Revisão dos leads no Meta — ainda devagar</div>
+        <div class="step-desc">Os formulários de lead do Meta foram ajustados para melhorar a qualidade. O volume ainda está baixo — vamos acompanhar os próximos 7 dias com a LP ativa para avaliar se o problema é de qualificação ou de volume de tráfego.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num sn-green">3</div>
+      <div class="step-body">
+        <div class="step-title">Follow-up comercial — ASPMAQ e Editora Pipoca</div>
+        <div class="step-desc"><strong>ASPMAQ</strong>: orçamento enviado, em contato ativo — pressionar para fechamento. <strong>Editora Pipoca</strong>: reunião realizada, tabela enviada — dar retorno até o fim da semana. São os dois leads mais avançados do período.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num sn-red">4</div>
+      <div class="step-body">
+        <div class="step-title">Filtrar leads fora do ICP antes de repassar ao comercial</div>
+        <div class="step-desc">LN Logística (concorrente) e UNIQ Alimentos chegaram sem qualificação adequada. Vamos ajustar o filtro MQL para reduzir o tempo do time comercial em leads com baixa aderência.</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+<footer>Cardô Marketing · DFT Logística · Reunião 10/06/2026</footer>
+</body>
+</html>
