@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Pauta — DFT Logística · 17/06/2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fraunces:wght@500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#07071a;
+  --card:rgba(255,255,255,.05);
+  --card2:rgba(255,255,255,.08);
+  --brd:rgba(255,255,255,.1);
+  --txt:#e8eaf6;
+  --mu:rgba(255,255,255,.55);
+  --accent:#4f6ef7;
+  --accent2:#6b8aff;
+  --green:#34d399;
+  --amber:#fbbf24;
+  --red:#f87171;
+  --orange:#fb923c;
+}
+html{font-size:20px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--txt);
+  min-height:100vh;
+  background:
+    radial-gradient(1100px 700px at -5% -15%, rgba(25,25,120,.45) 0%, transparent 60%),
+    radial-gradient(800px 600px at 105% 105%, rgba(38,33,191,.18) 0%, transparent 60%),
+    var(--bg);
+}
+.gl{height:3px;background:linear-gradient(90deg,#2621bf,#4285f4,#6b8aff,#2621bf);background-size:300%;animation:gl 4s linear infinite;}
+@keyframes gl{0%{background-position:0%}100%{background-position:300%}}
+
+header{background:rgba(10,10,36,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--brd);}
+.hi{max-width:1100px;margin:0 auto;padding:24px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.brand{font-size:.78rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin-bottom:4px;}
+h1{font-family:'Fraunces',serif;font-size:1.6rem;color:#fff;}
+h1 em{font-style:italic;color:var(--accent2);}
+.subtitle{font-size:.85rem;color:var(--mu);margin-top:3px;}
+.date-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid var(--brd);border-radius:8px;padding:8px 16px;font-size:.85rem;font-weight:800;color:#fff;}
+
+main{max-width:1100px;margin:0 auto;padding:40px 36px 80px;}
+
+.sec{font-size:.72rem;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent2);display:flex;align-items:center;gap:10px;margin-bottom:20px;margin-top:48px;}
+.sec:first-child{margin-top:0;}
+.sec::after{content:'';flex:1;height:1px;background:var(--brd);}
+.sec span{background:rgba(107,138,255,.12);border:1px solid rgba(107,138,255,.25);border-radius:6px;padding:2px 10px;}
+
+/* métricas */
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:8px;}
+.m-card{background:var(--card2);border:1px solid var(--brd);border-radius:14px;padding:18px 16px;text-align:center;position:relative;overflow:hidden;}
+.m-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.m-card.c-blue::before{background:var(--accent);}
+.m-card.c-green::before{background:var(--green);}
+.m-card.c-amber::before{background:var(--amber);}
+.m-card.c-red::before{background:var(--red);}
+.m-card.c-orange::before{background:var(--orange);}
+.m-lbl{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--mu);margin-bottom:6px;}
+.m-val{font-size:1.6rem;font-weight:900;color:#fff;line-height:1;}
+.m-sub{font-size:.72rem;color:var(--mu);margin-top:5px;}
+
+/* canal split */
+.canal-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px;}
+.canal-card{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:16px 20px;}
+.canal-head{font-size:.75rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--mu);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.canal-head::before{content:'';width:8px;height:8px;border-radius:50%;}
+.cg::before{background:#4285f4;}
+.cm::before{background:#0866ff;}
+.clp::before{background:#34d399;}
+.canal-metrics{display:flex;gap:20px;flex-wrap:wrap;}
+.cm-item{display:flex;flex-direction:column;gap:2px;}
+.cm-lbl{font-size:.65rem;font-weight:700;text-transform:uppercase;color:var(--mu);letter-spacing:.8px;}
+.cm-val{font-size:1.05rem;font-weight:900;color:#fff;}
+
+/* lp destaque */
+.lp-box{background:linear-gradient(135deg,rgba(52,211,153,.08),rgba(52,211,153,.03));border:1px solid rgba(52,211,153,.3);border-radius:14px;padding:20px 24px;margin-bottom:12px;display:flex;gap:16px;align-items:flex-start;}
+.lp-icon{font-size:1.8rem;flex-shrink:0;}
+.lp-badge{font-size:.62rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#34d399;margin-bottom:4px;}
+.lp-title{font-size:1rem;font-weight:900;color:#fff;margin-bottom:6px;}
+.lp-desc{font-size:.83rem;color:rgba(255,255,255,.7);line-height:1.6;}
+.lp-stats{display:flex;gap:20px;margin-top:12px;flex-wrap:wrap;}
+.lp-stat{display:flex;flex-direction:column;gap:2px;}
+.lp-stat-lbl{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:rgba(255,255,255,.45);}
+.lp-stat-val{font-size:1rem;font-weight:900;color:#34d399;}
+
+/* alerta */
+.alert{background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.25);border-radius:12px;padding:16px 20px;display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;}
+.alert.amber{background:rgba(251,191,36,.06);border-color:rgba(251,191,36,.25);}
+.alert-icon{font-size:1.1rem;flex-shrink:0;}
+.alert-txt{font-size:.85rem;color:#fca5a5;line-height:1.6;}
+.alert.amber .alert-txt{color:#fde68a;}
+.alert-txt strong{color:#f87171;}
+.alert.amber .alert-txt strong{color:#fbbf24;}
+
+/* leads table */
+.tbl-wrap{background:var(--card);border:1px solid var(--brd);border-radius:14px;overflow:hidden;margin-bottom:8px;}
+table{width:100%;border-collapse:collapse;}
+thead tr{background:rgba(15,15,50,.8);}
+thead th{padding:13px 14px;text-align:left;font-size:.75rem;font-weight:800;color:rgba(255,255,255,.65);letter-spacing:.5px;white-space:nowrap;border-bottom:1px solid var(--brd);}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.06);transition:background .15s;}
+tbody tr:last-child{border-bottom:none;}
+tbody tr:hover{background:rgba(255,255,255,.04);}
+tbody td{padding:12px 14px;font-size:.85rem;color:#cbd5e0;vertical-align:middle;line-height:1.4;}
+td.emp{font-weight:800;font-size:.9rem;color:#e8eaf6;}
+td.seg{font-size:.78rem;color:var(--mu);}
+td.obs{font-size:.78rem;color:var(--mu);}
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:.7rem;font-weight:800;white-space:nowrap;}
+.b-green{background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.3);}
+.b-amber{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.3);}
+.b-red{background:rgba(248,113,113,.12);color:#f87171;border:1px solid rgba(248,113,113,.25);}
+.b-blue{background:rgba(107,138,255,.15);color:#818cf8;border:1px solid rgba(107,138,255,.3);}
+.b-gray{background:rgba(148,163,184,.1);color:#94a3b8;border:1px solid rgba(148,163,184,.2);}
+.b-orange{background:rgba(251,146,60,.12);color:#fb923c;border:1px solid rgba(251,146,60,.25);}
+.dt{font-size:.75rem;color:var(--mu);font-weight:700;}
+.canal-tag{font-size:.68rem;font-weight:700;background:rgba(255,255,255,.07);border-radius:5px;padding:2px 7px;color:var(--mu);}
+
+/* campanha cards */
+.camp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
+.camp-card{background:var(--card);border:1px solid var(--brd);border-radius:14px;padding:18px 20px;position:relative;}
+.camp-card.c-warn{border-color:rgba(248,113,113,.3);background:rgba(248,113,113,.04);}
+.camp-name{font-size:.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--mu);margin-bottom:8px;}
+.camp-invest{font-size:1.4rem;font-weight:900;color:#fff;margin-bottom:2px;}
+.camp-invest span{font-size:.8rem;font-weight:600;color:var(--mu);}
+.camp-sub{font-size:.75rem;color:var(--mu);margin-bottom:12px;}
+.camp-stats{display:flex;gap:16px;flex-wrap:wrap;}
+.cs-item{display:flex;flex-direction:column;gap:2px;}
+.cs-lbl{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--mu);}
+.cs-val{font-size:.9rem;font-weight:900;color:#fff;}
+.warn-tag{position:absolute;top:14px;right:14px;font-size:.6rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;background:rgba(248,113,113,.15);color:#f87171;border:1px solid rgba(248,113,113,.3);border-radius:20px;padding:2px 8px;}
+
+/* follows pendentes */
+.follow-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.follow-card{background:var(--card);border:1px solid var(--brd);border-radius:14px;padding:18px 20px;}
+.follow-name{font-size:.95rem;font-weight:900;color:#fff;margin-bottom:4px;}
+.follow-seg{font-size:.78rem;color:var(--mu);margin-bottom:10px;}
+.follow-status{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.follow-last{font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.5;}
+.follow-q{font-size:.78rem;font-weight:800;color:var(--amber);margin-top:8px;}
+
+/* próximos passos */
+.steps{display:flex;flex-direction:column;gap:14px;}
+.step{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--brd);border-radius:14px;padding:18px 20px;}
+.step-num{width:32px;height:32px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:900;color:#fff;flex-shrink:0;}
+.step-num.sn-amber{background:rgba(251,191,36,.2);color:#fbbf24;border:1px solid rgba(251,191,36,.3);}
+.step-num.sn-green{background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.3);}
+.step-num.sn-red{background:rgba(248,113,113,.12);color:#f87171;border:1px solid rgba(248,113,113,.25);}
+.step-num.sn-orange{background:rgba(251,146,60,.15);color:#fb923c;border:1px solid rgba(251,146,60,.3);}
+.step-body{}
+.step-title{font-size:.95rem;font-weight:900;color:#fff;margin-bottom:4px;}
+.step-desc{font-size:.83rem;color:rgba(255,255,255,.7);line-height:1.6;}
+.step-desc strong{color:#fff;}
+
+footer{text-align:center;padding:32px;font-size:.8rem;color:var(--mu);}
+</style>
+</head>
+<body>
+<div class="gl"></div>
+<header>
+  <div class="hi">
+    <div>
+      <div class="brand">Cardô Marketing × DFT Logística</div>
+      <h1>Pauta de <em>Reunião</em></h1>
+      <p class="subtitle">Performance, leads e próximos passos</p>
+    </div>
+    <div class="date-badge">📅 17 de Junho de 2026</div>
+  </div>
+</header>
+<div class="gl"></div>
+
+<main>
+
+  <!-- RESUMO -->
+  <div class="sec"><span>01</span> Resumo do período — 10/06 a 17/06</div>
+  <div class="metrics">
+    <div class="m-card c-blue">
+      <div class="m-lbl">Total investido</div>
+      <div class="m-val">R$560</div>
+      <div class="m-sub">Google Ads (7 dias)</div>
+    </div>
+    <div class="m-card c-green">
+      <div class="m-lbl">Leads LP v2</div>
+      <div class="m-val">3</div>
+      <div class="m-sub">Com empresa + CNPJ</div>
+    </div>
+    <div class="m-card c-amber">
+      <div class="m-lbl">CPL real</div>
+      <div class="m-val">R$158</div>
+      <div class="m-sub">B2B ÷ 3 leads LP</div>
+    </div>
+    <div class="m-card c-blue">
+      <div class="m-lbl">Cliques Google</div>
+      <div class="m-val">136</div>
+      <div class="m-sub">CPC médio R$4,12</div>
+    </div>
+    <div class="m-card c-orange">
+      <div class="m-lbl">Meta — leads form</div>
+      <div class="m-val">12</div>
+      <div class="m-sub">10–12/06 · sem empresa</div>
+    </div>
+  </div>
+
+  <div class="canal-row">
+    <div class="canal-card">
+      <div class="canal-head cg">Google Ads</div>
+      <div class="canal-metrics">
+        <div class="cm-item"><div class="cm-lbl">Investido</div><div class="cm-val">R$560,01</div></div>
+        <div class="cm-item"><div class="cm-lbl">Cliques</div><div class="cm-val">136</div></div>
+        <div class="cm-item"><div class="cm-lbl">Leads pixel</div><div class="cm-val">5</div></div>
+        <div class="cm-item"><div class="cm-lbl">CPC médio</div><div class="cm-val">R$4,12</div></div>
+      </div>
+    </div>
+    <div class="canal-card">
+      <div class="canal-head cm">Meta Ads</div>
+      <div class="canal-metrics">
+        <div class="cm-item"><div class="cm-lbl">Leads form</div><div class="cm-val">12</div></div>
+        <div class="cm-item"><div class="cm-lbl">Período</div><div class="cm-val">10–12/06</div></div>
+        <div class="cm-item"><div class="cm-lbl">Invest.</div><div class="cm-val">—</div></div>
+      </div>
+    </div>
+    <div class="canal-card">
+      <div class="canal-head clp">LP DFT v2</div>
+      <div class="canal-metrics">
+        <div class="cm-item"><div class="cm-lbl">Leads</div><div class="cm-val">3</div></div>
+        <div class="cm-item"><div class="cm-lbl">No ar desde</div><div class="cm-val">12/06</div></div>
+        <div class="cm-item"><div class="cm-lbl">Qualidade</div><div class="cm-val">Alta</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LP DESTAQUE -->
+  <div class="sec"><span>02</span> LP DFT v2 — primeira semana no ar</div>
+
+  <div class="lp-box">
+    <div class="lp-icon">🚀</div>
+    <div style="flex:1">
+      <div class="lp-badge">Ativada em 12/06 · 5 dias rodando</div>
+      <div class="lp-title">3 leads qualificados em 5 dias — com empresa e CNPJ</div>
+      <div class="lp-desc">
+        A nova LP entrou no ar na quinta-feira (12/06) e já gerou <strong style="color:#34d399">3 leads com dados completos</strong>: nome, empresa, CNPJ, WhatsApp e volume de carga. Todos chegaram via formulário direto na planilha. Nenhum deles foi rastreado pelo pixel do Google — isso é um ponto de atenção (ver seção 04).
+      </div>
+      <div class="lp-stats">
+        <div class="lp-stat"><div class="lp-stat-lbl">Dias no ar</div><div class="lp-stat-val">5</div></div>
+        <div class="lp-stat"><div class="lp-stat-lbl">Leads gerados</div><div class="lp-stat-val">3</div></div>
+        <div class="lp-stat"><div class="lp-stat-lbl">Com CNPJ</div><div class="lp-stat-val">3 / 3</div></div>
+        <div class="lp-stat"><div class="lp-stat-lbl">CPL estimado</div><div class="lp-stat-val">~R$158</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEADS -->
+  <div class="sec"><span>03</span> Leads recebidos — 10/06 a 17/06</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Empresa / Nome</th>
+          <th>Segmento</th>
+          <th>Data</th>
+          <th>Origem</th>
+          <th>Volume</th>
+          <th>Status</th>
+          <th>Observações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="emp">Novari · Guillermo Augusto</td>
+          <td class="seg">—</td>
+          <td><span class="dt">16/06</span></td>
+          <td><span class="canal-tag">LP v2</span></td>
+          <td>R$30–100k</td>
+          <td><span class="badge b-amber">Contato pendente</span></td>
+          <td class="obs">CNPJ confirmado · e-mail gmail (acionar WhatsApp)</td>
+        </tr>
+        <tr>
+          <td class="emp">Importcargo · Flávio Otoniel</td>
+          <td class="seg">Importação / Cargo</td>
+          <td><span class="dt">16/06</span></td>
+          <td><span class="canal-tag">LP v2</span></td>
+          <td>R$30–100k</td>
+          <td><span class="badge b-amber">Contato pendente</span></td>
+          <td class="obs">E-mail corporativo · maior potencial do lote</td>
+        </tr>
+        <tr>
+          <td class="emp">Perfil Indústria · Diego Costa</td>
+          <td class="seg">Indústria</td>
+          <td><span class="dt">16/06</span></td>
+          <td><span class="canal-tag">LP v2</span></td>
+          <td>Até R$10k</td>
+          <td><span class="badge b-amber">Contato pendente</span></td>
+          <td class="obs">Volume menor · vale qualificar antes de priorizar</td>
+        </tr>
+        <tr>
+          <td class="emp">3 leads — Branding Google</td>
+          <td class="seg">—</td>
+          <td><span class="dt">11–16/06</span></td>
+          <td><span class="canal-tag">Google Ads</span></td>
+          <td>—</td>
+          <td><span class="badge b-blue">Aguardando dados</span></td>
+          <td class="obs">Pixel registrou 3 conversões · identificar os contatos no CRM</td>
+        </tr>
+        <tr>
+          <td class="emp">12 leads — Meta Ads (form)</td>
+          <td class="seg">Sem empresa</td>
+          <td><span class="dt">10–12/06</span></td>
+          <td><span class="canal-tag">Meta</span></td>
+          <td>—</td>
+          <td><span class="badge b-red">Sem qualificação</span></td>
+          <td class="obs">Formulário Meta · nenhum preencheu empresa ou CNPJ — fora do ICP B2B</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CAMPANHAS -->
+  <div class="sec"><span>04</span> Performance por campanha — Google Ads</div>
+
+  <div class="camp-grid">
+    <div class="camp-card">
+      <div class="camp-name">Branding</div>
+      <div class="camp-invest">R$36 <span>/ 7 dias</span></div>
+      <div class="camp-sub">Campanha de marca</div>
+      <div class="camp-stats">
+        <div class="cs-item"><div class="cs-lbl">Cliques</div><div class="cs-val">20</div></div>
+        <div class="cs-item"><div class="cs-lbl">Leads pixel</div><div class="cs-val" style="color:#34d399">3</div></div>
+        <div class="cs-item"><div class="cs-lbl">CPL</div><div class="cs-val">R$12</div></div>
+      </div>
+    </div>
+    <div class="camp-card">
+      <div class="camp-name">Demanda Ativa</div>
+      <div class="camp-invest">R$50 <span>/ 1 dia</span></div>
+      <div class="camp-sub">Paused após 10/06</div>
+      <div class="camp-stats">
+        <div class="cs-item"><div class="cs-lbl">Cliques</div><div class="cs-val">33</div></div>
+        <div class="cs-item"><div class="cs-lbl">Leads pixel</div><div class="cs-val" style="color:#34d399">2</div></div>
+        <div class="cs-item"><div class="cs-lbl">CPL</div><div class="cs-val">R$25</div></div>
+      </div>
+    </div>
+    <div class="camp-card c-warn">
+      <div class="warn-tag">⚠ sem conversão pixel</div>
+      <div class="camp-name">Contratos B2B</div>
+      <div class="camp-invest">R$474 <span>/ 6 dias</span></div>
+      <div class="camp-sub">Nova campanha LP B2B</div>
+      <div class="camp-stats">
+        <div class="cs-item"><div class="cs-lbl">Cliques</div><div class="cs-val">83</div></div>
+        <div class="cs-item"><div class="cs-lbl">Leads pixel</div><div class="cs-val" style="color:#f87171">0</div></div>
+        <div class="cs-item"><div class="cs-lbl">CPL real*</div><div class="cs-val">R$158</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-txt">
+      <strong>Contratos B2B: R$474 investidos com 0 conversões no pixel.</strong> A campanha está gerando tráfego (83 cliques) e os 3 leads da LP chegaram via planilha — mas o Google Ads não está registrando essas conversões. O pixel precisa ser configurado corretamente no GTM para a LP v2. Sem rastreamento, o Google não consegue otimizar os lances automaticamente e o CPL real fica invisível para a plataforma.
+    </div>
+  </div>
+
+  <div class="alert amber">
+    <div class="alert-icon">📋</div>
+    <div class="alert-txt">
+      <strong>Meta Ads: 12 leads de formulário sem empresa.</strong> Todos os leads captados pelo formulário nativo do Meta no período 10–12/06 chegaram sem nome de empresa ou CNPJ. Isso indica que o público-alvo da campanha Meta ainda está atingindo consumidores finais ou transportadores autônomos, fora do ICP de contrato B2B. Sugestão: revisar segmentação ou pausar Meta e concentrar verba no Google + LP.
+    </div>
+  </div>
+
+  <!-- FOLLOWS PENDENTES -->
+  <div class="sec"><span>05</span> Follows pendentes — reunião anterior</div>
+
+  <div class="follow-grid">
+    <div class="follow-card">
+      <div class="follow-name">ASPMAQ — Fabricação de Máquinas</div>
+      <div class="follow-seg">Automação Industrial · orçamento enviado em Jun</div>
+      <div class="follow-status"><span class="badge b-green">Orçamento enviado</span></div>
+      <div class="follow-last">Cliente potencial em contato ativo desde o início de Junho. Orçamento já encaminhado.</div>
+      <div class="follow-q">❓ Houve retorno? Negociação avançou?</div>
+    </div>
+    <div class="follow-card">
+      <div class="follow-name">Editora Pipoca</div>
+      <div class="follow-seg">Indústria Editorial · reunião realizada em 08/06</div>
+      <div class="follow-status"><span class="badge b-blue">Tabela enviada</span></div>
+      <div class="follow-last">Reunião realizada no dia 08/06. Tabela de valores encaminhada logo após.</div>
+      <div class="follow-q">❓ Respondeu? Tem interesse em fechar?</div>
+    </div>
+  </div>
+
+  <!-- PRÓXIMOS PASSOS -->
+  <div class="sec"><span>06</span> Próximos passos</div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num sn-red">1</div>
+      <div class="step-body">
+        <div class="step-title">Corrigir rastreamento de conversão — LP v2 + GTM</div>
+        <div class="step-desc">O pixel não está registrando os leads que chegam pela LP. Sem esse dado, o Google Ads não consegue otimizar. Precisamos configurar o evento de conversão no GTM para disparar no envio do formulário da LP v2. <strong>Prioridade máxima — sem isso, a campanha B2B está rodando no escuro.</strong></div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Acionar os 3 leads da LP v2 — Novari, Importcargo e Perfil</div>
+        <div class="step-desc">Os três leads chegaram em 16/06 e ainda aguardam primeiro contato. <strong>Importcargo</strong> tem e-mail corporativo e volume de R$30–100k — maior prioridade. <strong>Novari</strong> usou Gmail — acionar preferencialmente via WhatsApp. <strong>Perfil Indústria</strong> indicou volume menor — qualificar antes de avançar.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num sn-amber">3</div>
+      <div class="step-body">
+        <div class="step-title">Identificar os 3 leads do Branding Google no CRM</div>
+        <div class="step-desc">O pixel registrou 3 conversões pela campanha de Branding (11/06, 13/06, 16/06) mas não temos os dados de contato ainda. Cruzar com entradas no WhatsApp, e-mail ou planilha nessas datas para identificar quem são.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num sn-amber">4</div>
+      <div class="step-body">
+        <div class="step-title">Revisar segmentação Meta — ou redirecionar verba para Google</div>
+        <div class="step-desc">Os 12 leads do Meta no período não têm empresa — indicam público fora do ICP B2B. Duas opções: <strong>(a)</strong> ajustar segmentação Meta para empresas com CNPJ e cargo decisor; ou <strong>(b)</strong> pausar Meta e concentrar todo o orçamento em Google + LP enquanto a campanha B2B ganha dados de conversão.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num sn-green">5</div>
+      <div class="step-body">
+        <div class="step-title">Dar retorno em ASPMAQ e Editora Pipoca</div>
+        <div class="step-desc">Os dois leads mais avançados do período anterior ainda estão em aberto. <strong>ASPMAQ</strong>: orçamento enviado — pressionar por decisão. <strong>Editora Pipoca</strong>: reunião e tabela enviadas — agendar ligação de follow-up. São os contatos mais próximos de fechar.</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+<footer>Cardô Marketing · DFT Logística · Reunião 17/06/2026</footer>
+</body>
+</html>
