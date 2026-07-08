@@ -355,6 +355,7 @@ tbody td:first-child{color:#6272a0;font-size:.75rem;}
 
 <script>
 var _RAW=[];
+var _MRAW=[];
 const _SID="17CuuYKxf13NHpJHRAZPoGW9_1Ni_xnIcVTeDQHXb5yQ",_GG="550644796",_GM="734559877";
 var _csvURL=function(gid){return "https://docs.google.com/spreadsheets/d/"+_SID+"/gviz/tq?tqx=out:csv&gid="+gid;};
 function _sp(l){var p=[],c="",q=false;for(var i=0;i<l.length;i++){var ch=l[i];if(ch==='"')q=!q;else if(ch===","&&!q){p.push(c.trim().replace(/^"|"$/g,""));c="";}else c+=ch;}p.push(c.trim().replace(/^"|"$/g,""));return p;}
@@ -376,15 +377,27 @@ function _parseGAds(txt){
   return rows;
 }
 function _parseMeta(txt){
-  var agg={},dmin=null,dmax=null;
+  var rows=[];
   txt.split("\n").slice(1).forEach(function(l){
     if(!l.trim())return;
     var p=_sp(l);if(p.length<10||!p[3])return;
-    var cr=p[3];var _dd=(p[0]||"").split("/");if(_dd.length===3){var _iso=_dd[2]+"-"+_dd[1]+"-"+_dd[0];if(!dmin||_iso<dmin)dmin=_iso;if(!dmax||_iso>dmax)dmax=_iso;}
-    if(!agg[cr])agg[cr]={name:cr,camp:p[1],url:p[4].trim(),invest:0,imp:0,viz:0,alcance:0,viz3s:0,p25:0,visitas:0};
-    var a=agg[cr];a.invest+=_brlP(p[5]);a.imp+=_intP(p[6]);a.viz+=_intP(p[7]);a.alcance+=_intP(p[8]);a.viz3s+=_intP(p[9]);a.p25+=(p.length>11?_intP(p[11]):0);a.visitas+=(p.length>14?_intP(p[14]):0);
+    var _dd=(p[0]||"").split("/");var _iso=_dd.length===3?_dd[2]+"-"+_dd[1]+"-"+_dd[0]:"";
+    rows.push({date:_iso,name:p[3],camp:p[1],url:p[4].trim(),invest:_brlP(p[5]),imp:_intP(p[6]),viz:_intP(p[7]),alcance:_intP(p[8]),viz3s:_intP(p[9]),p25:(p.length>11?_intP(p[11]):0),visitas:(p.length>14?_intP(p[14]):0)});
+  });
+  return rows;
+}
+function _aggMeta(rows){
+  var agg={},dmin=null,dmax=null;
+  rows.forEach(function(r){
+    if(r.date){if(!dmin||r.date<dmin)dmin=r.date;if(!dmax||r.date>dmax)dmax=r.date;}
+    if(!agg[r.name])agg[r.name]={name:r.name,camp:r.camp,url:r.url,invest:0,imp:0,viz:0,alcance:0,viz3s:0,p25:0,visitas:0};
+    var a=agg[r.name];a.invest+=r.invest;a.imp+=r.imp;a.viz+=r.viz;a.alcance+=r.alcance;a.viz3s+=r.viz3s;a.p25+=r.p25;a.visitas+=r.visitas;
   });
   return {ads:Object.values(agg),dmin:dmin,dmax:dmax};
+}
+function _renderMetaRange(from,to){
+  var rows=(!from||!to)?_MRAW:_MRAW.filter(function(r){return r.date&&r.date>=from&&r.date<=to;});
+  var md=_aggMeta(rows);_renderMeta(md.ads,md.dmin,md.dmax);
 }
 function _renderMeta(ads,dmin,dmax){var _ml=document.getElementById('metaLbl');if(_ml&&dmin&&dmax){var _fb=function(s){var x=s.split("-");return x[2]+"/"+x[1]+"/"+x[0];};_ml.textContent="Meta Ads — Brand Awareness · "+_fb(dmin)+" a "+_fb(dmax);}
   function pct(a,b){return b?Math.round(a/b*1000)/10:0;}
@@ -413,6 +426,7 @@ const PCT=v=>v==null||isNaN(v)?'—':v.toLocaleString('pt-BR',{minimumFractionDi
 const S=(id,h)=>{const e=document.getElementById(id);if(e)e.innerHTML=h;};
 
 function filterData(p){if(p==='all')return _RAW;if(!_RAW.length)return [];var today=_RAW[_RAW.length-1].date,t=new Date(today),c=new Date(t);c.setDate(t.getDate()-(p-1));var cs=c.toISOString().slice(0,10);return _RAW.filter(function(r){return r.date>=cs;});}
+function _periodRange(p){if(p==='all'||!_RAW.length)return[null,null];var today=_RAW[_RAW.length-1].date,t=new Date(today),c=new Date(t);c.setDate(t.getDate()-(p-1));return[c.toISOString().slice(0,10),today];}
 function setDow(dow,btn){
   document.querySelectorAll(".ptab").forEach(function(b){b.classList.remove("active");});
   btn.classList.add("active");
@@ -428,7 +442,7 @@ function setDow(dow,btn){
 }
 function setPreset(p,btn){
   document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');render(filterData(p),p==='all'?null:p);
+  btn.classList.add('active');render(filterData(p),p==='all'?null:p);var _pr=_periodRange(p);_renderMetaRange(_pr[0],_pr[1]);
 }
 function agg(data){
   const tot={invest:0,imp:0,clk:0,leads:0};
@@ -485,7 +499,7 @@ function buildCharts(data){
     }
   }}});
 }
-function applyDateRange(){var from=document.getElementById('dFrom').value,to=document.getElementById('dTo').value;if(!from||!to){alert('Selecione as duas datas.');return;}var f=_RAW.filter(function(r){return r.date>=from&&r.date<=to;});if(!f.length){alert('Nenhum dado no periodo.');return;}document.querySelectorAll('.ptab').forEach(function(b){b.classList.remove('active');});render(f,Math.round((new Date(to)-new Date(from))/864e5)+1);}
+function applyDateRange(){var from=document.getElementById('dFrom').value,to=document.getElementById('dTo').value;if(!from||!to){alert('Selecione as duas datas.');return;}var f=_RAW.filter(function(r){return r.date>=from&&r.date<=to;});if(!f.length){alert('Nenhum dado no periodo.');return;}document.querySelectorAll('.ptab').forEach(function(b){b.classList.remove('active');});render(f,Math.round((new Date(to)-new Date(from))/864e5)+1);_renderMetaRange(from,to);}
 function buildTable(data){
   const sorted=[...data].sort((a,b)=>b.date.localeCompare(a.date));
   const cb={'Branding':'pbr','Demanda Ativa':'pdem','Segmentos':'pseg'};
@@ -600,7 +614,7 @@ function buildSim(){
       if(dt)dt.value=_RAW[_RAW.length-1].date;
     }
     render(_RAW);
-    var _md=_parseMeta(m);_renderMeta(_md.ads,_md.dmin,_md.dmax);
+    _MRAW=_parseMeta(m);var _md=_aggMeta(_MRAW);_renderMeta(_md.ads,_md.dmin,_md.dmax);
   }catch(e){console.error('Erro ao buscar planilha:',e);}
 })();
 
